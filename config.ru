@@ -1,2 +1,3 @@
-require './app'
+require './jenny.rb'
+
 run Sinatra::Application
