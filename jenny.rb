@@ -15,6 +15,13 @@ require 'sinatra/redirect_with_flash'
 class User < ActiveRecord::Base
 end
 
+class Identity < OmniAuth::Identity::Models::ActiveRecord
+  belongs_to :user
+
+  validates :email, :presence => true, :uniqueness => true, :case_sensitive => false
+  validates :password, :presence => true, :confirmation => true
+  validates :password_confirmation, :presence => true
+end
 
 configure do
   set :sessions, true
