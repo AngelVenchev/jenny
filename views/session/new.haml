@@ -1,0 +1,13 @@
+%form{ :action => "/auth/identity/new", :method => "post"}
+  %fieldset
+    %ul
+      %li
+        %label{:for => "username"} UserName:
+        %input{:type => "text", :name => "username", :class => "text"}
+      %li
+        %label{:for => "password"} Password:
+        %input{:type => "password", :name => "password", :class => "password"}
+      %li
+        %label{:for => "password_confirm"} Confirm Password:
+        %input{:type => "password", :name => "password_confirm", :class => "password"}
+    %input{:type => "submit", :value => "Send", :class => "button"}

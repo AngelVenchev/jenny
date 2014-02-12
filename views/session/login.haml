@@ -1,0 +1,17 @@
+%h1 HI!
+%p welcome
+/ %a{:href => '/auth/github'} Login with Github
+/ %br
+/ %a{:href =>'/auth/facebook'} Login with facebook
+/ %br
+%form{ :action => "/auth/identity/callback", :method => "post"}
+  %fieldset
+    %ul
+      %li
+        %label{:for => "username"} UserName:
+        %input{:type => "text", :name => "username", :class => "text"}
+      %li
+        %label{:for => "password"} Password:
+        %input{:type => "password", :name => "password", :class => "password"}
+    %input{:type => "submit", :value => "Send", :class => "button"}
+    %a{:href => '/auth/identity/new'} Register
