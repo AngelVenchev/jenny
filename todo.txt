@@ -1,5 +1,0 @@
-replace   :authenticated with :user_id
-register  :Identity manually
-create    :new User on Identity crete
-create    :custom forms -> from gist
-validate  :register form on the client

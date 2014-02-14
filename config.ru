@@ -1,3 +1,6 @@
-require './jenny.rb'
+require 'sinatra/base'
 
-run Sinatra::Application
+Dir.glob('./{models,helpers,controllers}/*.rb').each { |file| require file }
+
+map('/') { run ApplicationController }
+map('/user') { run UserController }

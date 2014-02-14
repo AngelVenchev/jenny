@@ -7,13 +7,12 @@ gem 'sinatra-activerecord'
 gem 'sinatra-flash'
 gem 'sinatra-redirect-with-flash'
 gem 'haml'
-gem 'thin'
 gem 'json'
 gem 'tux'
+gem 'digest-sha3'
 
 group :development do
   gem 'sqlite3'
-  gem 'shotgun'
 end
 
 group :production do
