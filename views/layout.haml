@@ -1,10 +1,1 @@
-%html
-  %head
-    %title Jenny
-  %body
-    - if(flash[:notice])
-      %p
-        =flash[:notice]
-    - if(session[:authenticated])
-      %a{:href => '/logout'} Logout
-    =yield
+=yield

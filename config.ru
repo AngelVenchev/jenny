@@ -1,6 +1,16 @@
 require 'sinatra/base'
+require 'haml'
 
-Dir.glob('./{models,helpers,controllers}/*.rb').each { |file| require file }
+require './lib/router'
+require './lib/app'
 
-map('/') { run ApplicationController }
-map('/user') { run UserController }
+require './models/environments'
+require './models/user'
+
+require './controllers/application_controller'
+require './controllers/authentication_controller'
+require './controllers/home_controller'
+
+require './config/routes'
+
+map('/') { run App }

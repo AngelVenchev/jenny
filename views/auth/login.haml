@@ -1,0 +1,11 @@
+%form{ :action => "/auth/login", :method => "post"}
+  %fieldset
+    %ul
+      %li
+        %label{:for => "username"} UserName:
+        %input{:type => "text", :name => "username", :class => "text"}
+      %li
+        %label{:for => "password"} Password:
+        %input{:type => "password", :name => "password", :class => "password"}
+    %input{:type => "submit", :value => "Send", :class => "button"}
+    %a{:href => '/auth/register'} Register
