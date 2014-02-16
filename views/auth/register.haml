@@ -1,16 +1,25 @@
-%form{ :action => "/auth/register", :method => "post"}
+%form{ action:"/auth/register", :method => "post"}
   %fieldset
-    %ul
+    %ul{style:"list-style-type:none"}
       %li
-        %label{:for => "username"} UserName:
-        %input{:type => "text", :name => "username", :class => "text"}
+        %span{class:"labels"}
+          %label{for:"username"} UserName:
+        %span{class:"values"}
+          %input{type:"text", name:"username", class:"text"}
       %li
-        %label{:for => "email"} E-mail:
-        %input{:type => "text", :name => "email", :class => "text"}
+        %span{class:"labels"}
+          %label{for:"email"} E-mail:
+        %span{class:"values"}
+          %input{type:"text", name:"email", class:"text"}
       %li
-        %label{:for => "password"} Password:
-        %input{:type => "password", :name => "password", :class => "password"}
+        %span{class:"labels"}
+          %label{for:"password"} Password:
+        %span{class:"values"}
+          %input{type:"password", name:"password", class:"text"}
       %li
-        %label{:for => "password"} Confirm Password:
-        %input{:type => "password", :name => "password", :class => "password"}
-    %input{:type => "submit", :value => "Send", :class => "button"}
+        %span{class:"labels"}
+          %label{for:"password"} Confirm Password:
+        %span{class:"values"}
+          %input{type:"password", name:"password", class:"text"}
+      %li
+        %input{type:"submit", value:"Send", class:"button"}

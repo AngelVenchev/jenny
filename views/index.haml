@@ -1,10 +1,8 @@
-%h3= session[:user_id]
-
-- if locals[:user]
+- if user
   %div
-    %a{:href => '/auth/logout'} Logout
+    %a{href:'/auth/logout'} Logout
 - else
   %div
-    %a{:href => '/auth/register'} Register
+    %a{href:'/auth/register'} Register
   %div
-    %a{:href => '/auth/login'} Login
+    %a{href:'/auth/login'} Login
