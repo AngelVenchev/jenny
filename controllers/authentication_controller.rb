@@ -8,8 +8,6 @@ class AuthenticationController < ApplicationController
     # catch exception
     if user.save
       session[:user_id] = user.id
-      puts "in auth"
-      puts user.id
       redirect '/'
     else
       # add flash message
@@ -26,9 +24,14 @@ class AuthenticationController < ApplicationController
     # add flash message for both
     if user
       session[:user_id] = user.id
-      redirect "/"
+      redirect '/'
     else
       redirect 'auth/login'
     end
+  end
+
+  def logout(params)
+    session[:user_id] = nil
+    redirect '/'
   end
 end
