@@ -1,3 +1,5 @@
+#\ -p 9393
+
 require 'sinatra/base'
 require 'haml'
 
