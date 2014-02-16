@@ -1,6 +1,6 @@
-%h3= @current_user
+%h3= session[:user_id]
 
-- if @current_user
+- if locals[:user]
   %div
     %a{:href => '/auth/logout'} Logout
 - else
@@ -8,5 +8,3 @@
     %a{:href => '/auth/register'} Register
   %div
     %a{:href => '/auth/login'} Login
-
-%h1= @test
