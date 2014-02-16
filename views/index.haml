@@ -1,6 +1,15 @@
+____ PICTURE ____
+
+
+
 - if user
   %div
     %a{href:'/auth/logout'} Logout
+
+  %ul{style:"list-style-type:none"}
+  -user.projects.each do |project|
+    %li= project.name
+
 - else
   %div
     %a{href:'/auth/register'} Register

@@ -5,6 +5,8 @@ require 'digest/sha3'
 require 'date'
 
 class User < ActiveRecord::Base
+  has_and_belongs_to_many :projects
+
   validates :username, uniqueness: { case_sensitive: false }, presence: true
   validates :password, presence: true
   validates :email, presence: true

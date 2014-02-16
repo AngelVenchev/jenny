@@ -9,6 +9,7 @@ require './lib/app'
 
 require './models/environments'
 require './models/user'
+require './models/project'
 
 require './controllers/application_controller'
 require './controllers/authentication_controller'
