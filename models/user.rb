@@ -1,6 +1,6 @@
 require 'sinatra'
 require 'sinatra/activerecord'
-require_relative './environments.rb'
+require './models/environments'
 require 'digest/sha3'
 require 'date'
 
@@ -18,8 +18,6 @@ class User < ActiveRecord::Base
 
   def self.authenticate(username, password)
     pass = Digest::SHA3.hexdigest(password)
-    user = User.all.first do |user|
-      user.username == username and user.password == pass
-    end
+    user = User.find_by password:pass,username:username
   end
 end

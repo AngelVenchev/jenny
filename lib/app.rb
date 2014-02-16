@@ -1,5 +1,6 @@
 class App < Sinatra::Base
-  include Sinatra::Helpers
+  register Sinatra::Helpers
+  register Sinatra::Flash
 
   set :views, File.expand_path('../../views', __FILE__)
   enable :sessions, :method_override

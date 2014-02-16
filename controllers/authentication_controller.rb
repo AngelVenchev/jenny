@@ -7,10 +7,11 @@ class AuthenticationController < ApplicationController
     user = User.init(params)
     # catch exception
     if user.save
+      flash[:notice] = "Successfully registered in Jennywith username: #{user.username}"
       session[:user_id] = user.id
       redirect '/'
     else
-      # add flash message
+      flash[:notice] = "Unable to register user with username: #{user.username}"
       redirect 'auth/register'
     end
   end
@@ -21,17 +22,19 @@ class AuthenticationController < ApplicationController
 
   def login(params)
     user = User.authenticate(params[:username],params[:password])
-    # add flash message for both
     if user
+      flash[:notice] = "Successfully Logged in to Jenny!"
       session[:user_id] = user.id
       redirect '/'
     else
+      flash[:notice] = "Wrong username and/or password!"
       redirect 'auth/login'
     end
   end
 
   def logout(params)
     session[:user_id] = nil
+    flash[:notice] = "Successfully Logged Out of Jenny"
     redirect '/'
   end
 end
