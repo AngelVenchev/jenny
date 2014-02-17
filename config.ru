@@ -7,13 +7,8 @@ require 'haml'
 require './lib/router'
 require './lib/app'
 
-require './models/environments'
-require './models/user'
-require './models/project'
-
-require './controllers/application_controller'
-require './controllers/authentication_controller'
-require './controllers/home_controller'
+Dir["./models/*.rb"].each { |file| require file.gsub '.rb', '' }
+Dir["./controllers/*.rb"].each { |file| require file.gsub '.rb', '' }
 
 require './config/routes'
 

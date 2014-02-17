@@ -5,7 +5,8 @@ require 'haml'
 require './lib/router'
 require './lib/app'
 
-require './models/environments'
+require './config/environments'
+
 require './models/user'
 require './models/project'
 require 'sinatra/activerecord/rake'
