@@ -1,6 +1,3 @@
-require 'sinatra'
-require 'sinatra/activerecord'
-require './models/environments'
 require 'digest/sha3'
 require 'date'
 
@@ -9,7 +6,7 @@ class User < ActiveRecord::Base
 
   validates :username, uniqueness: { case_sensitive: false }, presence: true
   validates :password, presence: true
-  validates :email, presence: true
+  validates :email, presence: true, uniqueness: true
 
   def self.init(params)
     username = params[:username]

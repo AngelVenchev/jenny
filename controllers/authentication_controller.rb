@@ -1,5 +1,5 @@
 class AuthenticationController < ApplicationController
-  def register_new(params)
+  def new(params)
     haml :"auth/register"
   end
 
@@ -7,7 +7,7 @@ class AuthenticationController < ApplicationController
     user = User.init(params)
     # catch exception
     if user.save
-      flash[:notice] = "Successfully registered in Jennywith username: #{user.username}"
+      flash[:notice] = "Successfully registered in Jenny with username: #{user.username}"
       session[:user_id] = user.id
       redirect '/'
     else
@@ -16,14 +16,14 @@ class AuthenticationController < ApplicationController
     end
   end
 
-  def show_login(params)
+  def show(params)
     haml :"auth/login"
   end
 
   def login(params)
     user = User.authenticate(params[:username],params[:password])
     if user
-      flash[:notice] = "Successfully Logged in to Jenny!"
+      flash[:notice] = "Successfully logged in to Jenny!"
       session[:user_id] = user.id
       redirect '/'
     else
@@ -34,7 +34,7 @@ class AuthenticationController < ApplicationController
 
   def logout(params)
     session[:user_id] = nil
-    flash[:notice] = "Successfully Logged Out of Jenny"
+    flash[:notice] = "Successfully logged out of Jenny"
     redirect '/'
   end
 end

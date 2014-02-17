@@ -1,14 +1,20 @@
 ____ PICTURE ____
-
-
-
 - if user
   %div
     %a{href:'/auth/logout'} Logout
 
+  %h2 Projects
   %ul{style:"list-style-type:none"}
-  -user.projects.each do |project|
-    %li= project.name
+    -user.projects.each do |project|
+      %li= project.name
+    %li
+      - if session[:show_name_text_box]
+        %form{ action:"/project", :method => "post"}
+          %label{for:"name"} Project Name:
+          %input{type:"text", name:"name", class:"text"}
+          %input{type:"submit", value:"Send", class:"button"}
+      - else
+        %a{href:'/project/new'} Create new project
 
 - else
   %div
