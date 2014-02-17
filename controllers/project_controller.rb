@@ -10,6 +10,7 @@ class ProjectController < ApplicationController
     user = User.find_by id:session[:user_id]
     if project.save
       user.projects << project
+      session[:show_name_text_box] = false
       flash[:notice] = "Successfully created project #{params[:name]}"
       redirect '/'
     else
