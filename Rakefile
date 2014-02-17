@@ -1,12 +1,15 @@
 require 'sinatra/base'
+require 'sinatra/activerecord'
 require 'sinatra/flash'
 require 'haml'
+
+require './config/environments'
 
 require './lib/router'
 require './lib/app'
 
-require './config/environments'
+Dir["./models/*.rb"].each { |file| require file.gsub '.rb', '' }
+Dir["./controllers/*.rb"].each { |file| require file.gsub '.rb', '' }
 
-require './models/user'
-require './models/project'
+require './config/routes'
 require 'sinatra/activerecord/rake'

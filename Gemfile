@@ -11,6 +11,12 @@ gem 'json'
 gem 'tux'
 gem 'digest-sha3'
 
+group :test do
+  gem 'sqlite3'
+  gem 'rspec'
+  gem 'capybara'
+end
+
 group :development do
   gem 'sqlite3'
 end

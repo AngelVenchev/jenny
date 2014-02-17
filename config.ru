@@ -1,8 +1,11 @@
 #\ -p 9393
 
 require 'sinatra/base'
+require 'sinatra/activerecord'
 require 'sinatra/flash'
 require 'haml'
+
+require './config/environments'
 
 require './lib/router'
 require './lib/app'
