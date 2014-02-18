@@ -20,4 +20,3 @@ map "/public" do
 end
 
 map('/') { run App }
-

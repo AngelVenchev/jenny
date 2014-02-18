@@ -27,7 +27,7 @@ describe ProjectController, :type => :controller do
     end
 
     context 'logged in' do
-      let(:logged_user) { User.find_by username:'user' }
+      let(:logged_user) { User.find_by username: 'user' }
 
       before do
         post '/auth/login', params
@@ -44,10 +44,10 @@ describe ProjectController, :type => :controller do
       end
 
       it 'allows me to crete project' do
-        param = {name:"test_project"}
+        param = {name: 'test_project'}
         post '/project', param
 
-        project = Project.find_by name:'test_project'
+        project = Project.find_by name: 'test_project'
         project.should_not == nil
         logged_user.projects.first.should == project
       end
@@ -63,25 +63,23 @@ describe ProjectController, :type => :controller do
       end
 
       it "doesn't allow me to create a project" do
-        param = {name:'test_project'}
+        param = {name: 'test_project'}
         post '/project', param
 
-        project = Project.find_by name:'test_project'
+        project = Project.find_by name: 'test_project'
         project.should == nil
       end
 
       after do
-        project = Project.find_by name:'test_project'
+        project = Project.find_by name: 'test_project'
         project.destroy if project
       end
-
-
     end
 
     after do
-      user = User.find_by username:'user'
+      user = User.find_by username: 'user'
       user.destroy if user
-      project = Project.find_by name:'test_project'
+      project = Project.find_by name: 'test_project'
       project.destroy if project
     end
   end

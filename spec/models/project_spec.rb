@@ -14,7 +14,7 @@ describe Project do
   describe "validation" do
 
     before do
-      Project.create(name:"test_project")
+      Project.create(name: "test_project")
     end
 
     it "doesn't allow nameless projects" do
@@ -22,11 +22,11 @@ describe Project do
     end
 
     it "doesn't allow name duplication" do
-      Project.create(name:"test_project").errors.any?.should == true
+      Project.create(name: "test_project").errors.any?.should == true
     end
 
     it "doesn't allow diffrent case name duplication" do
-      Project.create(name:"test_PROJECT").errors.any?.should == true
+      Project.create(name: "test_PROJECT").errors.any?.should == true
     end
 
     after do
@@ -36,16 +36,16 @@ describe Project do
 
   describe "association" do
     before do
-      Project.create(name:'project1')
-      Project.create(name:'project2')
-      User.create(username:'user1',email:'mail1', password:'pass')
-      User.create(username:'user2',email:'mail2', password:'pass')
+      Project.create(name: 'project1')
+      Project.create(name: 'project2')
+      User.create(username: 'user1',email: 'mail1', password: 'pass')
+      User.create(username: 'user2',email: 'mail2', password: 'pass')
     end
 
-    let(:proj1) { Project.find_by name:'project1' }
-    let(:proj2) { Project.find_by name:'project2' }
-    let(:user1) { User.find_by username:'user1' }
-    let(:user2) { User.find_by username:'user2' }
+    let(:proj1) { Project.find_by name: 'project1' }
+    let(:proj2) { Project.find_by name: 'project2' }
+    let(:user1) { User.find_by username: 'user1' }
+    let(:user2) { User.find_by username: 'user2' }
 
     it 'has many users' do
       proj1.users << user1

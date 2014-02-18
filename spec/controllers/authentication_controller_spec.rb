@@ -14,7 +14,7 @@ describe AuthenticationController, :type => :controller do
   describe 'the signin process', :type => :feature do
 
     before do
-      user = User.init(username: 'user', email: 'user@example.com', :password => 'password')
+      user = User.init(username: 'user', email: 'user@example.com', password: 'password')
       user.save
     end
 
@@ -25,12 +25,12 @@ describe AuthenticationController, :type => :controller do
     end
 
     it 'signs me in' do
-      post '/auth/login', {username:'user', password:'password'}
+      post '/auth/login', {username: 'user', password: 'password'}
       last_response.should be_redirect
     end
 
     it "doesn't sign me in with invalid credentials" do
-      post '/auth/login', {username:'invalid_user', password:'password'}
+      post '/auth/login', {username: 'invalid_user', password: 'password'}
       last_response.should be_redirect
 
       follow_redirect!
@@ -46,7 +46,7 @@ describe AuthenticationController, :type => :controller do
   describe 'the signout process', :type => :feature do
 
     before do
-      post '/auth/login', {username:'user', password:'password'}
+      post '/auth/login', {username: 'user', password: 'password'}
     end
 
     it 'signs me out' do
@@ -61,7 +61,7 @@ describe AuthenticationController, :type => :controller do
   describe 'the register process', :type => :feature do
 
     let(:params) do
-      params =  {username:'new_user', email:'test@gmail.com', password:'test'}
+      params =  {username: 'new_user', email: 'test@gmail.com', password: 'test'}
     end
 
     it 'shows register page' do
@@ -77,7 +77,7 @@ describe AuthenticationController, :type => :controller do
       follow_redirect!
       last_request.url.should == 'http://example.org/'
 
-      user = User.find_by username:'new_user'
+      user = User.find_by username: 'new_user'
       user.should_not == nil
     end
 
@@ -91,7 +91,7 @@ describe AuthenticationController, :type => :controller do
     end
 
     after do
-      user = User.find_by username:'new_user'
+      user = User.find_by username: 'new_user'
       user.destroy if user
     end
 
