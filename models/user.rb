@@ -1,5 +1,4 @@
 require 'digest/sha3'
-require 'date'
 
 class User < ActiveRecord::Base
   has_and_belongs_to_many :projects
@@ -17,6 +16,6 @@ class User < ActiveRecord::Base
 
   def self.authenticate(username, password)
     pass = Digest::SHA3.hexdigest(password)
-    user = User.find_by password:pass,username:username
+    user = User.find_by password: pass, username: username
   end
 end
