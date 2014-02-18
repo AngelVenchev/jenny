@@ -1,4 +1,4 @@
-require './spec_helper'
+require 'spec_helper'
 
 describe AuthenticationController, :type => :controller do
   include Rack::Test::Methods
@@ -8,8 +8,7 @@ describe AuthenticationController, :type => :controller do
   end
 
   before do
-    ActiveRecord::Base.establish_connection adapter: 'sqlite3', database: '../test.db'
-
+    ActiveRecord::Base.establish_connection adapter: 'sqlite3', database: './test.db'
   end
 
   describe 'the signin process', :type => :feature do
@@ -61,6 +60,10 @@ describe AuthenticationController, :type => :controller do
 
   describe 'the register process', :type => :feature do
 
+    let(:params) do
+      params =  {username:'new_user', email:'test@gmail.com', password:'test'}
+    end
+
     it 'shows register page' do
       get '/auth/register'
       last_response.should be_ok
@@ -68,7 +71,7 @@ describe AuthenticationController, :type => :controller do
     end
 
     it 'creates a new user' do
-      post '/auth/register', {username:'new_user', email:'test@gmail.com', password:'test'}
+      post '/auth/register', params
       last_response.should be_redirect
 
       follow_redirect!
@@ -79,8 +82,8 @@ describe AuthenticationController, :type => :controller do
     end
 
     it "doesn't create the same user twice" do
-      post '/auth/register', {username:'new_user', email:'test@gmail.com', password:'test'}
-      post '/auth/register', {username:'new_user', email:'test@gmail.com', password:'test'}
+      post '/auth/register', params
+      post '/auth/register', params
       last_response.should be_redirect
 
       follow_redirect!
