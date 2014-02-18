@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/svenfuchs/i18n.git
+  revision: 8fc94e7e9ec20396e974b0549cf499662238bf56
+  specs:
+    i18n (0.6.9)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -30,7 +36,6 @@ GEM
     digest-sha3 (1.0.2)
     haml (4.0.5)
       tilt
-    i18n (0.6.9)
     json (1.8.1)
     mime-types (2.1)
     mini_portile (0.5.2)
@@ -92,6 +97,7 @@ DEPENDENCIES
   capybara
   digest-sha3
   haml
+  i18n!
   json
   pg
   rspec

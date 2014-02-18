@@ -10,14 +10,14 @@ gem 'haml'
 gem 'json'
 gem 'tux'
 gem 'digest-sha3'
+gem 'i18n'
 
 group :test do
-  gem 'sqlite3'
   gem 'rspec'
   gem 'capybara'
 end
 
-group :development do
+group :development, :test do
   gem 'sqlite3'
 end
 

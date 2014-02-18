@@ -5,6 +5,7 @@ require 'sinatra/flash'
 require 'rack/test'
 require 'rspec'
 require 'capybara/rspec'
+require 'i18n'
 
 # require '../config/environments'
 
@@ -15,3 +16,5 @@ Dir["../models/*.rb"].each { |file| require file.gsub '.rb', '' }
 Dir["../controllers/*.rb"].each { |file| require file.gsub '.rb', '' }
 
 require '../config/routes'
+
+I18n.enforce_available_locales = false
