@@ -5,7 +5,6 @@ class AuthenticationController < ApplicationController
 
   def register(params)
     user = User.init(params)
-    # catch exception
     if user.save
       flash[:notice] = "Successfully registered in Jenny with username: #{user.username}"
       session[:user_id] = user.id

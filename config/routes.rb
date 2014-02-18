@@ -18,7 +18,7 @@ Router.init do
   controller: 'AuthenticationController', action: 'logout'
 
   match method: :get, path: '/project/new',
-  controller: 'ProjectController', action:'new_asd'
+  controller: 'ProjectController', action:'new'
 
   match method: :post, path: '/project',
   controller: 'ProjectController', action:'create'

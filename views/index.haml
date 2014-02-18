@@ -9,7 +9,7 @@ ____ PICTURE ____
       %li= project.name
     %li
       - if session[:show_name_text_box]
-        %form{ action:"/project", :method => "post"}
+        %form{id:'new_project_form', action:"/project", :method => "post"}
           %label{for:"name"} Project Name:
           %input{type:"text", name:"name", class:"text"}
           %input{type:"submit", value:"Send", class:"button"}

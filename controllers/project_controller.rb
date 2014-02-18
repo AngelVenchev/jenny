@@ -1,5 +1,5 @@
 class ProjectController < ApplicationController
-  def new_asd(params)
+  def new(params)
     # show different view
     session[:show_name_text_box] = true
     redirect '/'
@@ -8,7 +8,7 @@ class ProjectController < ApplicationController
   def create(params)
     project = Project.new(name:params[:name])
     user = User.find_by id:session[:user_id]
-    if project.save
+    if user and project.save
       user.projects << project
       session[:show_name_text_box] = false
       flash[:notice] = "Successfully created project #{params[:name]}"
