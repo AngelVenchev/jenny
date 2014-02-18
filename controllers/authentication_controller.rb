@@ -12,7 +12,7 @@ class AuthenticationController < ApplicationController
       redirect '/'
     else
       flash[:notice] = "Unable to register user with username: #{user.username}"
-      redirect 'auth/register'
+      redirect '/auth/register'
     end
   end
 
@@ -28,7 +28,7 @@ class AuthenticationController < ApplicationController
       redirect '/'
     else
       flash[:notice] = "Wrong username and/or password!"
-      redirect 'auth/login'
+      redirect '/auth/login'
     end
   end
 

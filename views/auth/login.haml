@@ -1,18 +1,18 @@
-%form{ action:"/auth/login", method:"post"}
+%form{id:'login_form', action:'/auth/login', method:'post'}
   %fieldset
-    %ul{style:"list-style-type:none"}
+    %ul{style:'list-style-type:none'}
       %li
-        %span{class:"labels"}
-          %label{for:"username"} User Name:
-        %span{class:"values"}
-          %input{type:"text", name:"username", class:"text"}
+        %span{class:'labels'}
+          %label{for:'username'} User Name:
+        %span{class:'values'}
+          %input{type:'text', name:'username', class:'text'}
       %li
-        %span{class:"labels"}
-          %label{for:"password"} Password:
-        %span{class:"values"}
-          %input{type:"password", name:"password", class:"password"}
+        %span{class:'labels'}
+          %label{for:'password'} Password:
+        %span{class:'values'}
+          %input{type:'password', name:'password', class:'password'}
       %li
-        %span{class:"labels"}
-          %input{type:"submit", value:"Login", class:"button"}
-        %span{class:"values"}
+        %span{class:'labels'}
+          %input{type:'submit', value:'Login', class:'button'}
+        %span{class:'values'}
           %a{href:'/auth/register'} Register
