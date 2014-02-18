@@ -8,7 +8,7 @@ Task manager system for agile development for small and big teams
 
 ##Development setup
 * Clone repository
-* Run bundle
+* Run ``bundle``
 * Set up database with ``rake db:migrate``
 * Start server with ``rackup``
 * Done
