@@ -8,7 +8,9 @@ class App < Sinatra::Base
   router = Router.instance
 
   get "/*" do
-    router.routes[normalized_request_method][request.fullpath].call(params, self)
+    p params
+    path = request.env["REQUEST_PATH"]
+    router.routes[normalized_request_method][path].call(params, self)
   end
 
   post "/*" do
