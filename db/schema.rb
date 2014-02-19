@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140216215954) do
+ActiveRecord::Schema.define(version: 20140218223958) do
+
+  create_table "iterations", force: true do |t|
+    t.integer  "project_id"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.string   "title"
+    t.text     "theme"
+  end
 
   create_table "projects", force: true do |t|
     t.string   "name"
@@ -30,4 +38,5 @@ ActiveRecord::Schema.define(version: 20140216215954) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
 end

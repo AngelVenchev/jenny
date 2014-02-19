@@ -94,6 +94,5 @@ describe AuthenticationController, :type => :controller do
       user = User.find_by username: 'new_user'
       user.destroy if user
     end
-
   end
 end
