@@ -14,7 +14,7 @@ describe Project do
 
   describe 'validation' do
 
-    let(:project) { Project.create(name:'name') }
+    let(:project) { Project.create(name: 'name', description: 'description') }
 
     it "doens't allow records with no project_id" do
       params =
@@ -51,7 +51,7 @@ describe Project do
   end
 
   describe 'association' do
-    let(:project) { Project.create(name:'name') }
+    let(:project) { Project.create(name:'name', description: 'description') }
 
     it 'belongs to project' do
       params =

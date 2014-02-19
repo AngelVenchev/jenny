@@ -14,7 +14,7 @@ describe Project do
   describe "validation" do
 
     before do
-      Project.create(name: "test_project")
+      Project.create(name: "test_project", description: 'test_desctiprion')
     end
 
     it "doesn't allow nameless projects" do
@@ -22,11 +22,15 @@ describe Project do
     end
 
     it "doesn't allow name duplication" do
-      Project.create(name: "test_project").errors.any?.should == true
+      Project.create(name: "test_project", description:'description').errors.any?.should == true
     end
 
     it "doesn't allow diffrent case name duplication" do
-      Project.create(name: "test_PROJECT").errors.any?.should == true
+      Project.create(name: "test_PROJECT", description:'description').errors.any?.should == true
+    end
+
+    it 'allows records with no description' do
+      Project.create(name: 'test_project').errors.any?.should == false
     end
 
     after do
@@ -36,8 +40,8 @@ describe Project do
 
   describe "association" do
     before do
-      Project.create(name: 'project1')
-      Project.create(name: 'project2')
+      Project.create(name: 'project1', description: 'description1')
+      Project.create(name: 'project2', description: 'description2')
       User.create(username: 'user1',email: 'mail1', password: 'pass')
       User.create(username: 'user2',email: 'mail2', password: 'pass')
     end

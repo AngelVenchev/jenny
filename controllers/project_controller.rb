@@ -1,12 +1,13 @@
 class ProjectController < ApplicationController
   def new(params)
     user = User.find_by id: session[:user_id]
-    locals = {user: user.username}
+    other_users = User.all.sample(21).select { |u| u != user}.take 20
+    locals = {user: user, other_users: other_users }
     haml :"project/new", locals: locals
   end
 
   def create(params)
-    project = Project.new(name: params[:name])
+    project = Project.new(name: params[:name], description: params[:description])
     user = User.find_by id: session[:user_id]
     if user and project.save
       user.projects << project

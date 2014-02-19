@@ -27,6 +27,8 @@ describe AuthenticationController, :type => :controller do
     it 'signs me in' do
       post '/auth/login', {username: 'user', password: 'password'}
       last_response.should be_redirect
+      follow_redirect!
+      last_request.url.should == 'http://example.org/projects'
     end
 
     it "doesn't sign me in with invalid credentials" do
@@ -75,7 +77,7 @@ describe AuthenticationController, :type => :controller do
       last_response.should be_redirect
 
       follow_redirect!
-      last_request.url.should == 'http://example.org/'
+      last_request.url.should == 'http://example.org/projects'
 
       user = User.find_by username: 'new_user'
       user.should_not == nil

@@ -8,7 +8,7 @@ class AuthenticationController < ApplicationController
     if user.save
       flash[:notice] = "Successfully registered in Jenny with username: #{user.username}"
       session[:user_id] = user.id
-      redirect '/'
+      redirect '/projects'
     else
       flash[:error] = "Unable to register user with username: #{user.username}"
       redirect '/auth/register'
