@@ -17,9 +17,12 @@ Router.init do
   match method: :get, path: '/auth/logout',
   controller: 'AuthenticationController', action: 'logout'
 
-  match method: :get, path: '/project/new',
+  match method: :get, path: '/projects',
+  controller: 'ProjectController', action: 'index'
+
+  match method: :get, path: '/projects/new',
   controller: 'ProjectController', action:'new'
 
-  match method: :post, path: '/project',
+  match method: :post, path: '/projects',
   controller: 'ProjectController', action:'create'
 end

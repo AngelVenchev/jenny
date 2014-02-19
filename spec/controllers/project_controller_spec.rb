@@ -35,17 +35,17 @@ describe ProjectController, :type => :controller do
       end
 
       it 'allows me to create a project' do
-        last_response.body.include?("href='/project/new'").should == true
+        last_response.body.include?("href='/projects/new'").should == true
       end
 
       it 'shows project option' do
-        get '/project/new'
+        get '/projects/new'
         last_response.body.include?("id='new_project_form'")
       end
 
       it 'allows me to crete project' do
         param = {name: 'test_project'}
-        post '/project', param
+        post '/projects', param
 
         project = Project.find_by name: 'test_project'
         project.should_not == nil
@@ -59,12 +59,12 @@ describe ProjectController, :type => :controller do
       end
 
       it "doesn't allow me to create a project" do
-        last_response.body.include?("href='/project/new'").should_not == true
+        last_response.body.include?("href='/projects/new'").should_not == true
       end
 
       it "doesn't allow me to create a project" do
         param = {name: 'test_project'}
-        post '/project', param
+        post '/projects', param
 
         project = Project.find_by name: 'test_project'
         project.should == nil

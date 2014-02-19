@@ -1,0 +1,5 @@
+%ul
+  %li
+    %a{href: '/projects/new'}Create a new project
+  -user.projects.each do |project|
+    %li= project.name

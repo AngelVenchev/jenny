@@ -1,21 +1,28 @@
 class ProjectController < ApplicationController
   def new(params)
-    # show different view
-    session[:show_name_text_box] = true
-    redirect '/'
+    user = User.find_by id: session[:user_id]
+    locals = {user: user.username}
+    haml :"project/new", locals: locals
   end
 
   def create(params)
-    project = Project.new(name:params[:name])
-    user = User.find_by id:session[:user_id]
+    project = Project.new(name: params[:name])
+    user = User.find_by id: session[:user_id]
     if user and project.save
       user.projects << project
       session[:show_name_text_box] = false
       flash[:notice] = "Successfully created project #{params[:name]}"
-      redirect '/'
+      redirect '/projects'
     else
-      flash[:notice] = "Unable to create project with name #{params[:name]}"
-      redirect '/'
+      flash[:error] = "Unable to create project with name #{params[:name]}"
+      redirect '/projects/new'
     end
+  end
+
+  def index(params)
+    redirect '/' unless session[:user_id]
+    user = User.find(session[:user_id])
+    locals = {user: user}
+    haml :'project/index', locals: locals
   end
 end

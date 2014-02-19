@@ -1,6 +1,6 @@
 class AuthenticationController < ApplicationController
   def new(params)
-    haml :"auth/register"
+    haml :"auth/register", :layout => :'home_layout'
   end
 
   def register(params)
@@ -10,13 +10,13 @@ class AuthenticationController < ApplicationController
       session[:user_id] = user.id
       redirect '/'
     else
-      flash[:notice] = "Unable to register user with username: #{user.username}"
+      flash[:error] = "Unable to register user with username: #{user.username}"
       redirect '/auth/register'
     end
   end
 
   def show(params)
-    haml :"auth/login"
+    haml :"auth/login", :layout => :'home_layout'
   end
 
   def login(params)
@@ -24,9 +24,9 @@ class AuthenticationController < ApplicationController
     if user
       flash[:notice] = "Successfully logged in to Jenny!"
       session[:user_id] = user.id
-      redirect '/'
+      redirect '/projects'
     else
-      flash[:notice] = "Wrong username and/or password!"
+      flash[:error] = "Wrong username and/or password!"
       redirect '/auth/login'
     end
   end

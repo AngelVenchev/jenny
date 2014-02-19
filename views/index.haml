@@ -1,23 +1,6 @@
-____ PICTURE ____
-- if user
-  %div
-    %a{href: '/auth/logout'} Logout
-
-  %h2 Projects
-  %ul{style: "list-style-type:none"}
-    -user.projects.each do |project|
-      %li= project.name
-    %li
-      - if session[:show_name_text_box]
-        %form{id: 'new_project_form', action: "/project", method: "post"}
-          %label{for: "name"} Project Name:
-          %input{type: "text", name: "name", class: "text"}
-          %input{type: "submit", value: "Send", class: "button"}
-      - else
-        %a{href: '/project/new'} Create new project
-
-- else
-  %div
-    %a{href: '/auth/register'} Register
-  %div
-    %a{href: '/auth/login'} Login
+%div{class: "jumbotron"}
+  %h1 Jenny!
+  %p Welcome to Jenny, a task manager system for agile development.
+  %p
+    %a{href: '/auth/login', class:"btn btn-primary btn-lg", role:"button"}Login
+    %a{href: '/auth/register', class:"btn btn-primary btn-lg", role:"button"}Register
