@@ -30,7 +30,7 @@ describe Project do
     end
 
     it 'allows records with no description' do
-      Project.create(name: 'test_project').errors.any?.should == false
+      Project.create(name: 'project').errors.any?.should == false
     end
 
     after do

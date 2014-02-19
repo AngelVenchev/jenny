@@ -19,6 +19,10 @@ end
 
 group :development, :test do
   gem 'sqlite3'
+  gem 'ZenTest'
+  gem 'autotest-growl'
+  gem 'autotest-fsevent'
+  gem 'rerun'
 end
 
 group :production do
