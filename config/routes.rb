@@ -21,8 +21,18 @@ Router.init do
   controller: 'ProjectController', action: 'index'
 
   match method: :get, path: '/projects/new',
-  controller: 'ProjectController', action:'new'
+  controller: 'ProjectController', action: 'new'
 
   match method: :post, path: '/projects',
-  controller: 'ProjectController', action:'create'
+  controller: 'ProjectController', action: 'create'
+
+  match method: :get, path: '/projects/show',
+  controller: 'ProjectController', action: 'show'
+
+  # Router.instance.routes.each do |k,v|
+  #   puts k
+  #   v.each do |k2,v2|
+  #     puts "#{k2} => #{v2}"
+  #   end
+  # end
 end

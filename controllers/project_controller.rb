@@ -26,4 +26,9 @@ class ProjectController < ApplicationController
     locals = {user: user}
     haml :'project/index', locals: locals
   end
+
+  def show(params)
+    locals = {project: Project.find(params[:id]), user: User.find(session[:user_id])}
+    haml :'project/show', locals: locals
+  end
 end
