@@ -1,5 +1,70 @@
 .labels {
   text-align: right;
-  width: 145px;
+  width: 30%;
   display: inline-block;
+}
+
+.form {
+  border:1px solid silver;
+  border-radius: 10px;
+  width: 450px;
+  line-height: 30px;
+  margin:auto;
+  vertical-align: center;
+}
+
+.form fieldset {
+  margin: 0;
+  padding: 0;
+}
+
+.form ul {
+  list-style-type: none
+}
+
+.form li {
+  margin-top: 15px;
+}
+
+.form li input {
+  border: 1px solid silver;
+  border-radius: 10px;
+  height: 30px;
+  padding: 0 10px;
+}
+
+.form li input:focus {
+  box-shadow: 1px 1px 10px dark-gray;
+  outline: none;
+}
+
+.form .button {
+  height: 40px;
+  line-height: 34px;
+  width: 350px;
+  margin: 0 auto;
+  padding: 0;
+  color: white;
+  border: 2px solid gray;
+  border-radius: 10px;
+  background-color: silver;
+  font-size: 18px;
+  text-transform: uppercase;
+
+  background: -webkit-linear-gradient(to left, silver 50%, gray 50%);
+  background: -moz-linear-gradient(to left, silver 50%, gray 50%);
+  background: -o-linear-gradient(to left, silver 50%, gray 50%);
+  background: -ms-linear-gradient(to left, silver 50%, gray 50%);
+  background: linear-gradient(to left, silver 50%, gray 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  -webkit-transition: background-position 600ms, box-shadow 60ms linear;
+  -moz-transition: background-position 600ms, box-shadow 60ms linear;
+  -o-transition: background-position 600ms, box-shadow 60ms linear;
+  -ms-transition: background-position 600ms, box-shadow 60ms linear;
+  transition: background-position 600ms, box-shadow 60ms linear;
+}
+
+.form .button:hover {
+  background-position: left bottom;
 }

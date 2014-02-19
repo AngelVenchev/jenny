@@ -1,9 +1,9 @@
-%form{id: 'register_form', action: '/auth/register', method: 'post'}
+%form{id: 'register_form', class: "form", action: '/auth/register', method: 'post'}
   %fieldset
-    %ul{style: 'list-style-type: none'}
+    %ul
       %li
         %span{class: 'labels'}
-          %label{for: 'username'} User Name:
+          %label{for: 'username'} UserName:
         %span{class: 'values'}
           %input{type: 'text', name: 'username', class: 'text'}
       %li
@@ -22,4 +22,4 @@
         %span{class: 'values'}
           %input{type: 'password', name: 'password', class: 'text'}
       %li
-        %input{type: 'submit', value: 'Register', class: 'button'}
+        %input{type: 'submit', value: 'Send', class: 'button'}
