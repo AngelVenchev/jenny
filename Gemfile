@@ -24,7 +24,3 @@ group :development, :test do
   gem 'autotest-fsevent'
   gem 'rerun'
 end
-
-group :production do
-  gem 'pg'
-end
