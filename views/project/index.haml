@@ -3,9 +3,5 @@
     %a{href: '/projects/new'}Create a new project
   -user.projects.each do |project|
     %li
-      %form{id: 'login_form',action: '/projects/show', method: 'get'}
-        %input{type: 'hidden', name: 'id', value: "#{project.id}"}
-        %a
-          %input{type: 'submit', value: "#{project.name}"}
-      / %a{href:"/projects/show"}
-      /   =project.name
+      %a{href:"/projects/#{project.id}"}
+        =project.name

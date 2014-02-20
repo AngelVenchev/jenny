@@ -10,6 +10,7 @@ require 'i18n'
 # require './config/environments'
 
 require './lib/router'
+require './lib/request_helper'
 require './lib/app'
 
 Dir["./models/*.rb"].each { |file| require file.gsub '.rb', '' }
