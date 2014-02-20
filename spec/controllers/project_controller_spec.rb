@@ -23,7 +23,7 @@ describe ProjectController, :type => :controller do
   describe 'the project creation process' do
     before do
       user = User.init params
-      user.save
+      bool = user.save
     end
 
     context 'logged in' do
@@ -34,7 +34,7 @@ describe ProjectController, :type => :controller do
         follow_redirect!
       end
 
-      it 'allows me to create a project' do
+      it 'shows create a new project form' do
         last_response.body.include?("href='/projects/new'").should == true
       end
 

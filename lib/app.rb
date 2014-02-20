@@ -24,6 +24,7 @@ class App < Sinatra::Base
 
   def transfer_request(router)
     path = request.env["REQUEST_PATH"]
+    path = request.env["PATH_INFO"] unless path
     action = router.routes[normalized_request_method][path]
     return action.call(params, self) unless action.nil?
 
