@@ -23,10 +23,10 @@ describe ProjectController, :type => :controller do
   describe 'the project creation process' do
     before do
       user = User.init params
-      bool = user.save
+      user.save
     end
 
-    context 'logged in' do
+    context 'when logged in' do
       let(:logged_user) { User.find_by username: 'user' }
 
       before do
@@ -51,9 +51,13 @@ describe ProjectController, :type => :controller do
         project.should_not == nil
         logged_user.projects.first.should == project
       end
+
+      after do
+        get 'auth/logout'
+      end
     end
 
-    context 'not logged in' do
+    context 'when not logged in' do
       before do
         get '/'
       end
@@ -77,10 +81,49 @@ describe ProjectController, :type => :controller do
     end
 
     after do
-      user = User.find_by username: 'user'
-      user.destroy if user
-      project = Project.find_by name: 'test_project'
-      project.destroy if project
+      User.delete_all
+      Project.delete_all
+    end
+  end
+
+  describe 'project viewing process' do
+
+    let(:project_params1) { {name: 'test'} }
+    let(:project_params2) { {name: 'test2', description: 'test_descr'} }
+
+    before do
+      user = User.init params
+      user.save
+      user.projects << Project.create(project_params1)
+      user.projects << Project.create(project_params2)
+    end
+
+    context 'when logged in' do
+      let(:logged_user) { User.find_by params[:username] }
+
+      before do
+        post '/auth/login', params
+        follow_redirect!
+      end
+
+      it 'shows user projects' do
+        last_response.body.include?("test").should == true
+        last_response.body.include?("test2").should == true
+      end
+
+      it 'shows project detailed information' do
+        project = Project.find_by(name: project_params2[:name])
+        get "/projects/#{project.id}"
+        last_response.body.include?(project_params2[:name]).should == true
+        last_response.body.include?(project_params2[:description]).should == true
+      end
+
+
+    end
+
+    after do
+      User.delete_all
+      Project.delete_all
     end
   end
 end
