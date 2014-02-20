@@ -1,5 +1,6 @@
 class ProjectController < ApplicationController
   def new(params)
+    redirect_if_not_logged_in
     user = User.find_by id: session[:user_id]
     other_users = User.all.sample(21).select { |u| u != user}.take 20
     locals = {user: user, other_users: other_users, home: '/projects' }
@@ -7,6 +8,7 @@ class ProjectController < ApplicationController
   end
 
   def create(params)
+    redirect_if_not_logged_in
     project = Project.new(name: params[:name], description: params[:description])
     user = User.find_by id: session[:user_id]
     if user and project.save
@@ -21,20 +23,27 @@ class ProjectController < ApplicationController
   end
 
   def index(params)
-    redirect '/' unless session[:user_id]
+    redirect_if_not_logged_in
     user = User.find(session[:user_id])
     locals = {user: user, home: '/projects'}
     haml :'project/index', locals: locals
   end
 
+  def edit(params)
+    redirect_if_not_logged_in
+    haml :'project/edit', locals: locals
+  end
+
   def show(params)
-    redirect '/' unless session[:user_id]
-    locals =
+    redirect_if_not_logged_in
+    haml :'project/show', locals: locals
+  end
+
+  def locals
     {
       project: Project.find(params[:id]),
       user: User.find(session[:user_id]),
       home: '/project/params[:id]'
     }
-    haml :'project/show', locals: locals
   end
 end
