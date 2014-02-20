@@ -117,8 +117,25 @@ describe ProjectController, :type => :controller do
         last_response.body.include?(project_params2[:name]).should == true
         last_response.body.include?(project_params2[:description]).should == true
       end
+    end
 
+    context 'when not logged in' do
 
+      before do
+        get '/'
+      end
+
+      it "doesn't show user projects" do
+        last_response.body.include?("test").should_not == true
+        last_response.body.include?("test2").should_not == true
+      end
+
+      it "doesn't show project detailed information" do
+        project = Project.find_by(name: project_params2[:name])
+        get "/projects/#{project.id}"
+        last_response.body.include?(project_params2[:name]).should_not == true
+        last_response.body.include?(project_params2[:description]).should_not == true
+      end
     end
 
     after do

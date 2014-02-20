@@ -28,6 +28,7 @@ class ProjectController < ApplicationController
   end
 
   def show(params)
+    redirect '/' unless session[:user_id]
     locals = {project: Project.find(params[:id]), user: User.find(session[:user_id])}
     haml :'project/show', locals: locals
   end
