@@ -11,14 +11,8 @@ describe ProjectController, :type => :controller do
     ActiveRecord::Base.establish_connection adapter: 'sqlite3', database: './test.db'
   end
 
-  let(:params) do
-     params =
-      {
-        username: "user",
-        email: "mail@mail.com",
-        password: 'pass'
-      }
-  end
+  let(:params) { {username: "user", email: "mail@mail.com", password: 'pass'} }
+  let(:params2) { {username: "user2", email: "mail2@mail.com", password: 'pass'} }
 
   describe 'the project creation process' do
     before do
@@ -88,14 +82,29 @@ describe ProjectController, :type => :controller do
 
   describe 'project viewing' do
 
-    let(:project_params1) { {name: 'test'} }
-    let(:project_params2) { {name: 'test2', description: 'test_description'} }
+    let(:project_params1) { {name: 'test_project_no_description'} }
+    let(:project_params2) { {name: 'test_project', description: 'test_description'} }
+
+    let(:iteration_params) do
+      {project_id: 1, start_date: DateTime.now, end_date: DateTime.now, title: "test_iteration"}
+    end
 
     before do
       user = User.init params
       user.save
-      user.projects << Project.create(project_params1)
-      user.projects << Project.create(project_params2)
+
+      user2 = User.init params2
+      user2.save
+
+      regular_project = Project.create(project_params1)
+      common_project = Project.create(project_params2)
+
+      Iteration
+
+      user.projects << regular_project
+      user.projects << common_project
+
+      user2.projects << common_project
     end
 
     context 'when logged in' do
@@ -107,8 +116,8 @@ describe ProjectController, :type => :controller do
       end
 
       it 'shows user projects' do
-        last_response.body.include?("test").should == true
-        last_response.body.include?("test2").should == true
+        last_response.body.include?(project_params1[:name]).should == true
+        last_response.body.include?(project_params2[:name]).should == true
       end
 
       it 'shows project detailed information' do
@@ -120,8 +129,15 @@ describe ProjectController, :type => :controller do
 
       it 'shows users working on the current project' do
         project = Project.find_by(name: project_params2[:name])
+        get "/projects/#{project.id}/edit"
+        last_response.body.include?(params[:username]).should == true
+        last_response.body.include?(params2[:username]).should == true
+      end
+
+      it 'shows iteration explorer' do
+        project = Project.find_by(name: project_params2[:name])
         get "/projects/#{project.id}"
-        last_response.body.include?(logged_user.username).should == true
+        last_response.body.include?(iteration_params[:title])
       end
     end
 
@@ -132,8 +148,8 @@ describe ProjectController, :type => :controller do
       end
 
       it "doesn't show user projects" do
-        last_response.body.include?("test").should_not == true
-        last_response.body.include?("test2").should_not == true
+        last_response.body.include?(project_params1[:name]).should_not == true
+        last_response.body.include?(project_params2[:name]).should_not == true
       end
 
       it "doesn't show project detailed information" do
@@ -147,6 +163,7 @@ describe ProjectController, :type => :controller do
     after do
       User.delete_all
       Project.delete_all
+      Iteration.delete_all
     end
   end
 end
