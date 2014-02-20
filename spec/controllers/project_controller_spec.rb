@@ -89,7 +89,7 @@ describe ProjectController, :type => :controller do
   describe 'project viewing' do
 
     let(:project_params1) { {name: 'test'} }
-    let(:project_params2) { {name: 'test2', description: 'test_descr'} }
+    let(:project_params2) { {name: 'test2', description: 'test_description'} }
 
     before do
       user = User.init params
@@ -113,7 +113,7 @@ describe ProjectController, :type => :controller do
 
       it 'shows project detailed information' do
         project = Project.find_by(name: project_params2[:name])
-        get "/projects/#{project.id}"
+        get "/projects/#{project.id}/edit"
         last_response.body.include?(project_params2[:name]).should == true
         last_response.body.include?(project_params2[:description]).should == true
       end

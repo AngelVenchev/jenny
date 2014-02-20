@@ -26,11 +26,11 @@ Router.init do
   match method: :post, path: '/projects',
   controller: 'ProjectController', action: 'create'
 
-  match method: :get, path: '/projects/:id',
-  controller: 'ProjectController', action: 'show'
-
   match method: :get, path: '/projects/:id/edit',
   controller: 'ProjectController', action: 'edit'
+
+  match method: :get, path: '/projects/:id',
+  controller: 'ProjectController', action: 'show'
 
   # Router.instance.routes.each do |k,v|
   #   puts k
