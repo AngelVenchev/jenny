@@ -1,4 +1,6 @@
 class ProjectController < ApplicationController
+  include ProjectHelper
+
   def new(params)
     redirect_if_not_logged_in
     user = User.find_by id: session[:user_id]
@@ -31,19 +33,21 @@ class ProjectController < ApplicationController
 
   def edit(params)
     redirect_if_not_logged_in
-    haml :'project/edit', locals: locals
+    haml :'project/edit', locals: common_locals(params[:id])
   end
 
   def show(params)
     redirect_if_not_logged_in
-    haml :'project/show', locals: locals
-  end
 
-  def locals
-    {
-      project: Project.find(params[:id]),
-      user: User.find(session[:user_id]),
-      home: '/project/params[:id]'
-    }
+    locals = common_locals(params[:id])
+
+    all_iterations = Iteration.all.order("start_date ASC")
+
+    session[:offset] = 0 if params[:current] or not session[:offset]
+    session[:offset] += params[:step].to_i if session[:offset].abs < all_iterations.size
+
+    locals[:iterations] = current_iterations(all_iterations)
+
+    haml :'project/show', locals: locals
   end
 end
