@@ -46,29 +46,30 @@ describe Project do
       User.create(username: 'user2',email: 'mail2', password: 'pass')
     end
 
-    let(:proj1) { Project.find_by name: 'project1' }
-    let(:proj2) { Project.find_by name: 'project2' }
+    let(:test_project) { Project.find_by name: 'project1' }
+    let(:test_project2) { Project.find_by name: 'project2' }
     let(:user1) { User.find_by username: 'user1' }
     let(:user2) { User.find_by username: 'user2' }
 
     it 'has many users' do
-      proj1.users << user1
-      proj1.users << user2
-      project_id = proj1.id
+      test_project.users << user1
+      test_project.users << user2
+      project_id = test_project.id
       modified_project = Project.find project_id
       modified_project.users.size.should == 2
     end
 
     it 'has and belongs to many users' do
-      user1.projects << proj1
-      user1.projects << proj2
-      user2.projects << proj1
+      user1.projects << test_project
+      user1.projects << test_project2
+      user2.projects << test_project
 
       user2.projects.first.users.size.should == 2
     end
 
     after do
       Project.delete_all
+      User.delete_all
     end
   end
 end
