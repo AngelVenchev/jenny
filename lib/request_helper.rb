@@ -1,10 +1,9 @@
 module RequestHelper
   private
 
-  def call_parametrized_query(path, router)
+  def evaluate_query(path, router)
     paths = router.routes[normalized_request_method].keys
-    parametrized_paths = paths.select { |p| p.include? ':'}
-    real_path = parametrized_paths.select { |p| match?(path,p) }.first
+    real_path = paths.select { |p| match?(path,p) }.first
 
     raise ArgumentError, "No such route #{path}" unless real_path
 
@@ -12,7 +11,22 @@ module RequestHelper
     router.routes[normalized_request_method][real_path].call(params, self)
   end
 
-  # adds parametrized params from path, to params map
+  def match?(path, p)
+    to_match, to_be_matched = extract_params(path), extract_params(p)
+    return false unless to_match.size == to_be_matched.size
+    to_be_matched.size.times do |i|
+      match = check_parameter(to_match[i], to_be_matched[i])
+      return false unless match
+    end
+    true
+  end
+
+  def check_parameter(to_match,to_be_matched)
+    return true if to_be_matched[0].include? ':'
+    to_be_matched == to_match
+  end
+
+  # adds parametrized parts from path, to params hash
   def prepare_params(path, params)
     parameters = extract_params(path)
     parameters.each_with_index do |param, i|
@@ -29,19 +43,5 @@ module RequestHelper
     path.gsub('/', ' ').split
   end
 
-  def match?(path, p)
-    to_match = extract_params(path)
-    to_be_matched = extract_params(p)
-    false unless to_match.size == to_be_matched.size
-    match = true
-    to_be_matched.size.times do |i|
-      match = check_parameter(to_match[i], to_be_matched[i])
-    end
-    match
-  end
 
-  def check_parameter(to_match,to_be_matched)
-    return true if to_be_matched[0].include? ':'
-    to_be_matched == to_match
-  end
 end
