@@ -2,7 +2,7 @@ class ProjectController < ApplicationController
   def new(params)
     user = User.find_by id: session[:user_id]
     other_users = User.all.sample(21).select { |u| u != user}.take 20
-    locals = {user: user, other_users: other_users }
+    locals = {user: user, other_users: other_users, home: '/projects' }
     haml :"project/new", locals: locals
   end
 
@@ -23,13 +23,18 @@ class ProjectController < ApplicationController
   def index(params)
     redirect '/' unless session[:user_id]
     user = User.find(session[:user_id])
-    locals = {user: user}
+    locals = {user: user, home: '/projects'}
     haml :'project/index', locals: locals
   end
 
   def show(params)
     redirect '/' unless session[:user_id]
-    locals = {project: Project.find(params[:id]), user: User.find(session[:user_id])}
+    locals =
+    {
+      project: Project.find(params[:id]),
+      user: User.find(session[:user_id]),
+      home: '/project/params[:id]'
+    }
     haml :'project/show', locals: locals
   end
 end

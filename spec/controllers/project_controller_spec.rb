@@ -86,7 +86,7 @@ describe ProjectController, :type => :controller do
     end
   end
 
-  describe 'project viewing process' do
+  describe 'project viewing' do
 
     let(:project_params1) { {name: 'test'} }
     let(:project_params2) { {name: 'test2', description: 'test_descr'} }
@@ -99,7 +99,7 @@ describe ProjectController, :type => :controller do
     end
 
     context 'when logged in' do
-      let(:logged_user) { User.find_by params[:username] }
+      let(:logged_user) { User.find_by username: params[:username] }
 
       before do
         post '/auth/login', params
@@ -116,6 +116,12 @@ describe ProjectController, :type => :controller do
         get "/projects/#{project.id}"
         last_response.body.include?(project_params2[:name]).should == true
         last_response.body.include?(project_params2[:description]).should == true
+      end
+
+      it 'shows users working on the current project' do
+        project = Project.find_by(name: project_params2[:name])
+        get "/projects/#{project.id}"
+        last_response.body.include?(logged_user.username).should == true
       end
     end
 

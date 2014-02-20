@@ -27,6 +27,9 @@
           %a{class: "navbar-brand", href:"/projects"}Jenny
         %div{class: "collapse navbar-collapse"}
           %ul{class: "nav navbar-nav"}
+            -if locals[:project]
+              %li
+                %a{href: "#{locals[:home]}"}Dashboard
             %li
               %a{href: '/auth/logout'}Logout
             %li
@@ -40,3 +43,4 @@
         %p{class: "alert alert-warning"}
           =flash[:error]
     =yield
+
