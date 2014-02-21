@@ -2,6 +2,9 @@ require 'digest/sha3'
 
 class User < ActiveRecord::Base
   has_and_belongs_to_many :projects
+  has_many :tasks_as_executor, :foreign_key => 'executor_id', :class_name => 'Task'
+  has_many :tasks_as_tester, :foreign_key => 'tester_id', :class_name => 'Task'
+
 
   validates :username, uniqueness: { case_sensitive: false }, presence: true
   validates :password, presence: true

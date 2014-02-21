@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140218223958) do
+ActiveRecord::Schema.define(version: 20140221124058) do
 
   create_table "iterations", force: true do |t|
     t.integer  "project_id"
@@ -18,6 +18,8 @@ ActiveRecord::Schema.define(version: 20140218223958) do
     t.datetime "end_date"
     t.string   "title"
     t.text     "theme"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "projects", force: true do |t|
@@ -28,8 +30,42 @@ ActiveRecord::Schema.define(version: 20140218223958) do
   end
 
   create_table "projects_users", id: false, force: true do |t|
-    t.integer "project_id"
-    t.integer "user_id"
+    t.integer  "project_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tasks", force: true do |t|
+    t.integer  "user_story_id"
+    t.integer  "executor_id"
+    t.integer  "tester_id"
+    t.string   "title"
+    t.text     "description"
+    t.integer  "status",         default: 0
+    t.boolean  "blocked",        default: false
+    t.string   "blocked_reason"
+    t.float    "task_estimate",  default: 0.0
+    t.float    "actual",         default: 0.0
+    t.float    "to_do",          default: 0.0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_stories", force: true do |t|
+    t.integer  "project_id"
+    t.integer  "iteration_id"
+    t.string   "title"
+    t.text     "description"
+    t.integer  "status",         default: 0
+    t.boolean  "ready",          default: false
+    t.boolean  "blocked",        default: false
+    t.string   "blocked_reason"
+    t.float    "task_estimate",  default: 0.0
+    t.float    "actual",         default: 0.0
+    t.float    "to_do",          default: 0.0
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|

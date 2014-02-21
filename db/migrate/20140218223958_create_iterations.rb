@@ -6,6 +6,7 @@ class CreateIterations < ActiveRecord::Migration
       t.datetime :end_date
       t.string :title
       t.text :theme
+      t.timestamps
     end
   end
 end
