@@ -3,7 +3,8 @@ class ProjectController < ApplicationController
 
   def new(params)
     redirect_if_not_logged_in
-    user = User.find_by id: session[:user_id]
+    clear_project_from_session
+    user = User.find_by id: current_user_id
     other_users = User.all.sample(21).select { |u| u != user}.take 20
     locals = {user: user, other_users: other_users, home: '/projects' }
     haml :"project/new", locals: locals
@@ -11,8 +12,9 @@ class ProjectController < ApplicationController
 
   def create(params)
     redirect_if_not_logged_in
+    clear_project_from_session
     project = Project.new(name: params[:name], description: params[:description])
-    user = User.find_by id: session[:user_id]
+    user = User.find_by id: current_user_id
     if user and project.save
       user.projects << project
       session[:show_name_text_box] = false
@@ -26,26 +28,25 @@ class ProjectController < ApplicationController
 
   def index(params)
     redirect_if_not_logged_in
-    user = User.find(session[:user_id])
-    locals = {user: user, home: '/projects'}
+    clear_project_from_session
+    locals = {user: current_user, home: '/projects'}
     haml :'project/index', locals: locals
   end
 
   def edit(params)
     redirect_if_not_logged_in
-    haml :'project/edit', locals: common_locals(params[:id])
+    set_proeject_to_session params[:id]
+    haml :'project/edit', locals: common_locals(current_project_id)
   end
 
   def show(params)
     redirect_if_not_logged_in
-
-    locals = common_locals(params[:id])
-
-    all_iterations = Iteration.all.order("start_date ASC")
+    set_proeject_to_session params[:id]
 
     session[:offset] = 0 if params[:current] or not session[:offset]
-    session[:offset] += params[:step].to_i if session[:offset].abs < all_iterations.size
+    session[:offset] += params[:step].to_i if session[:offset].abs < Iteration.count
 
+    locals = common_locals(current_project_id)
     locals[:iterations] = current_iterations(all_iterations)
 
     haml :'project/show', locals: locals

@@ -24,4 +24,7 @@ class ApplicationController < Delegator
     redirect '/' unless logged_in?
   end
 
+  def current_user_id
+    session[:user_id]
+  end
 end

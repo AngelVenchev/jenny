@@ -25,19 +25,19 @@ describe ProjectController, :type => :controller do
 
       before do
         post '/auth/login', params
-        follow_redirect!
       end
 
-      it 'shows create a new project form' do
+      it 'shows create a new project option' do
+        follow_redirect!
         last_response.body.include?("href='/projects/new'").should == true
       end
 
-      it 'shows project option' do
+      it 'shows create a new project form' do
         get '/projects/new'
         last_response.body.include?("id='new_project_form'")
       end
 
-      it 'allows me to crete project' do
+      it 'allows me to create project' do
         param = {name: 'test_project'}
         post '/projects', param
 

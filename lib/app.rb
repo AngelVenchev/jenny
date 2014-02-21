@@ -25,8 +25,8 @@ class App < Sinatra::Base
   end
 
   def transfer_request(router)
-    path = request.env["REQUEST_PATH"] or request.env["PATH_INFO"]
-    p "request path #{path}"
+    path = request.env["REQUEST_PATH"]
+    path = request.env["PATH_INFO"] unless path
     evaluate_query(path, router)
   end
 end
