@@ -78,4 +78,9 @@ Router.init do
   path: '/projects/:project_id/user_stories/:user_story_id',
   controller: 'UserStoryController',
   action: 'show'
+
+  match method: :get,
+  path: '/projects/:project_id/user_stories/:user_story_id/tasks/new',
+  controller: 'TaskController',
+  action: 'new'
 end
