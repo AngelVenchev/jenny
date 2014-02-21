@@ -1,4 +1,4 @@
-%form{id: 'new_task_form', class: 'form', action: "/projects/#{project.id}/user_stories/#{story.id}/tasks", method: "post"}
+%form{id: 'new_task_form', class: 'form', action: "/projects/#{locals[:project].id}/user_stories/#{locals[:story].id}/tasks", method: "post"}
   %ul
     %li
       %span{class: 'labels'}
@@ -14,23 +14,23 @@
       %span{class: 'labels'}
         %label{for: "executor_id"} Executor:
       %span{class: 'values'}
-        %select{name:"executor_id", form:"new_user_story_form"}
-          -users.each do |user|
+        %select{name:"executor_id", form:"new_task_form"}
+          -project.users.each do |user|
             %option{value: "#{user.id}"}
-              ="#{user.username}"
+              ="#{user.username} - #{user.projects.first.id}"
     %li
       %span{class: 'labels'}
         %label{for: "tester_id"} Tester:
       %span{class: 'values'}
-        %select{name:"tester_id", form:"new_user_story_form"}
-          -users.each do |user|
+        %select{name:"tester_id", form:"new_task_form"}
+          -project.users.each do |user|
             %option{value: "#{user.id}"}
               ="#{user.username}"
     %li
       %span{class: 'labels'}
         %label{for: "status"} Status:
       %span{class: "values"}
-        %select{name:"status", form:"new_user_story_form"}
+        %select{name:"status", form:"new_task_form"}
           -statuses.each do |key, status|
             %option{value: "#{key}"}
               =status

@@ -83,4 +83,9 @@ Router.init do
   path: '/projects/:project_id/user_stories/:user_story_id/tasks/new',
   controller: 'TaskController',
   action: 'new'
+
+  match method: :post,
+  path: '/projects/:project_id/user_stories/:user_story_id/tasks',
+  controller: 'TaskController',
+  action: 'create'
 end

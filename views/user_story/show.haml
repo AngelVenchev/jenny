@@ -18,8 +18,8 @@
     %th Est.
     %th Act.
     %th To-Do
-  %tr
-    -story.tasks.each do |task|
+  -story.tasks.each do |task|
+    %tr
       %th
         %a{href:"/projects/#{project.id}/user_stories/#{story.id}/tasks/#{task.id}"}=task.title
       %th=task.executor ? task.executor.username : nil
