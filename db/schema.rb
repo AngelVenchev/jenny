@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 20140221124058) do
     t.integer  "status",         default: 0
     t.boolean  "blocked",        default: false
     t.string   "blocked_reason"
-    t.float    "task_estimate",  default: 0.0
+    t.float    "estimate",       default: 0.0
     t.float    "actual",         default: 0.0
     t.float    "to_do",          default: 0.0
     t.datetime "created_at"
@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(version: 20140221124058) do
     t.boolean  "ready",          default: false
     t.boolean  "blocked",        default: false
     t.string   "blocked_reason"
-    t.float    "task_estimate",  default: 0.0
+    t.float    "estimate",       default: 0.0
     t.float    "actual",         default: 0.0
     t.float    "to_do",          default: 0.0
     t.datetime "created_at"

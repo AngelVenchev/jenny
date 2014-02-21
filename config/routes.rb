@@ -73,4 +73,9 @@ Router.init do
   path: 'projects/:project_id/user_stories',
   controller: 'UserStoryController',
   action: 'create'
+
+  match method: :get,
+  path: '/projects/:project_id/user_stories/:user_story_id',
+  controller: 'UserStoryController',
+  action: 'show'
 end

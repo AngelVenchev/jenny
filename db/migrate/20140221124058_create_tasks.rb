@@ -9,7 +9,7 @@ class CreateTasks < ActiveRecord::Migration
       t.integer :status, default: 0
       t.boolean :blocked, default: false
       t.string :blocked_reason
-      t.float :task_estimate, default: 0
+      t.float :estimate, default: 0
       t.float :actual, default: 0
       t.float :to_do, default: 0
       t.timestamps

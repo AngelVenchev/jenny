@@ -9,7 +9,7 @@ class CreateUserStories < ActiveRecord::Migration
       t.boolean :ready, default: false
       t.boolean :blocked, default: false
       t.string :blocked_reason
-      t.float :task_estimate, default: 0
+      t.float :estimate, default: 0
       t.float :actual, default: 0
       t.float :to_do, default: 0
       t.timestamps

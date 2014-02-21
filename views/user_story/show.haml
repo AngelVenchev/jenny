@@ -1,0 +1,29 @@
+%h1=story.title
+%p="описание: #{story.description}"
+%p="статус #{statuses[story.status]}"
+%p="ready #{story.ready} картинки може би"
+%p="blocked #{story.blocked} пак картинка"
+%p="blocked reason #{story.blocked_reason}"
+%p="task estimate: #{story.estimate}"
+%p="actual #{story.actual}"
+%p="to do #{story.to_do}"
+
+%a{href:"/projects/#{project.id}/user_stories/#{story.id}/tasks/new"} Add new task
+
+%table
+  %tr
+    %th Task name
+    %th Executor
+    %th Tester
+    %th Est.
+    %th Act.
+    %th To-Do
+  %tr
+    -story.tasks.each do |task|
+      %th
+        %a{href:"/projects/#{project.id}/user_stories/#{story.id}/tasks/#{task.id}"}=task.title
+      %th=task.executor ? task.executor.username : nil
+      %th=task.tester ? task.executor.username : nil
+      %th=task.estimate
+      %th=task.actual
+      %th=task.to_do
