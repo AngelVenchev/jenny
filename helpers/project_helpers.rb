@@ -26,16 +26,4 @@ module ProjectHelper
       iterations_to_be_shown(all_iterations)
     end
   end
-
-  def clear_project_from_session
-    session[:project_id] = nil
-  end
-
-  def set_proeject_to_session(id)
-    session[:project_id] = id
-  end
-
-  def current_project_id
-    session[:project_id]
-  end
 end
