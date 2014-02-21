@@ -1,0 +1,60 @@
+%form{id: 'new_user_story_form', class: 'form', action: "/projects/#{project_id}/user_stories", method: "post"}
+  %ul
+    %li
+      %span{class: 'labels'}
+        %label{for: "title"} Title:
+      %span{class: 'values'}
+        %input{type: "text", name: "title", class: "text"}
+    %li
+      %span{class: 'labels'}
+        %label{for: "theme"} Description:
+      %span{class: 'values'}
+        %input{type: "text", name: "theme", class: "text"}
+    %li
+      %span{class: 'labels'}
+        %label{for: "iteration_id"} Iteration:
+      %span{class: 'values'}
+        %select{name:"iteration_id", form:"new_user_story_form"}
+          -iterations.each do |iteration|
+            %option{value: "#{iteration.id}"}
+              ="#{iteration.title} (#{iteration.start_date.to_date} - #{iteration.end_date.to_date})"
+    %li
+      %span{class: 'labels'}
+        %label{for: "status"} Status:
+      %span{class: "values"}
+        %select{name:"status", form:"new_user_story_form"}
+          -statuses.each do |key, status|
+            %option{value: "#{key}"}
+              =status
+    %li
+      %span{class: 'labels'}
+        %label{for: "ready"} Ready:
+      %span{class: "values"}
+        %input{type: 'checkbox', name: 'ready'}
+    %li
+      %span{class: 'labels'}
+        %label{for: "blocked"} Blocked:
+      %span{class: "values"}
+        %input{type: 'checkbox', name: 'blocked'}
+    %li
+      %span{class: 'labels'}
+        %label{for: "blocked_reason"} Blocked reason:
+      %span{class: 'values'}
+        %input{type: "text", name: "blocked_reason", class: "text"}
+    %li
+      %span{class: 'labels'}
+        %label{for: "task_estimate"} Estimated hours:
+      %span{class: 'values'}
+        %input{name: "task_estimate", type: "number", step: "any"}
+    %li
+      %span{class: 'labels'}
+        %label{for: "actual"} Actual hours:
+      %span{class: 'values'}
+        %input{name: "actual", type: "number", step: "any"}
+    %li
+      %span{class: 'labels'}
+        %label{for: "to_do"} To do:
+      %span{class: 'values'}
+        %input{name: "to_do", type: "number", step: "any"}
+    %li
+      %input{type: "submit", value: "Create", class: "button"}
