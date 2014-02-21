@@ -20,10 +20,21 @@ class IterationController < ApplicationController
       start_date: Date.parse(params[:start_date]),
       end_date: Date.parse(params[:end_date]))
 
-    p iteration
+
+    Iteration.all.each do |i|
+      overlap =
+        iteration.start_date <= i.end_date &&
+        i.start_date <= iteration.end_date
+      if overlap
+        flash[:notice] = <<END
+Unable to create iteration #{params[:title]}.
+It overlaps with iteraiton #{i.title}
+END
+        redirect back
+      end
+    end
+
     project = Project.find(params[:project_id])
-    p project
-    p current_user
     user = current_user
     if project and iteration.save
       project.iterations << iteration

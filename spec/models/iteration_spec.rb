@@ -16,16 +16,6 @@ describe Project do
 
     let(:project) { Project.create(name: 'name', description: 'description') }
 
-    it "doens't allow records with no project_id" do
-      params =
-      {
-        title: 'test iteration',
-        start_date: DateTime.now,
-        end_date: DateTime.now
-      }
-      Iteration.create(params).errors.size.should_not == 0
-    end
-
     it "doesn't allow records with no title" do
       params =
       {
