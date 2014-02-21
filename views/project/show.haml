@@ -19,3 +19,24 @@
         %td=iterations[i].title
       -else
         %td add more iterations
+  %tr
+    %td
+      -backlog.each do |story|
+        %div
+          %div
+            %a{href: "/projects/#{project.id}/user_stories/#{story.id}"}=story.title
+          %div="#{story.description} това може да се съкрати"
+          %div="статус: трябва да е картинка #{story.status}"
+          %div="да има квадрат с цвят спрямо тези:"
+          %div="ready: #{story.ready}, blocked: #{story.blocked}"
+    -3.times do |i|
+      -if iterations[i]
+        %td
+          -iterations[i].user_stories.each do |story|
+            %div
+              %div
+                %a{href: "/projects/#{project.id}/user_stories/#{story.id}"}=story.title
+              %div="#{story.description} това може да се съкрати"
+              %div="статус: трябва да е картинка #{story.status}"
+              %div="да има квадрат с цвят спрямо тези:"
+              %div="ready: #{story.ready}, blocked: #{story.blocked}"

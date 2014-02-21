@@ -29,34 +29,4 @@
             %option{value: "#{key}"}
               =status
     %li
-      %span{class: 'labels'}
-        %label{for: "ready"} Ready:
-      %span{class: "values"}
-        %input{type: 'checkbox', name: 'ready'}
-    %li
-      %span{class: 'labels'}
-        %label{for: "blocked"} Blocked:
-      %span{class: "values"}
-        %input{type: 'checkbox', name: 'blocked'}
-    %li
-      %span{class: 'labels'}
-        %label{for: "blocked_reason"} Blocked reason:
-      %span{class: 'values'}
-        %input{type: "text", name: "blocked_reason", class: "text"}
-    %li
-      %span{class: 'labels'}
-        %label{for: "task_estimate"} Estimated hours:
-      %span{class: 'values'}
-        %input{name: "task_estimate", type: "number", step: "any"}
-    %li
-      %span{class: 'labels'}
-        %label{for: "actual"} Actual hours:
-      %span{class: 'values'}
-        %input{name: "actual", type: "number", step: "any"}
-    %li
-      %span{class: 'labels'}
-        %label{for: "to_do"} To do:
-      %span{class: 'values'}
-        %input{name: "to_do", type: "number", step: "any"}
-    %li
       %input{type: "submit", value: "Create", class: "button"}

@@ -42,6 +42,7 @@ class ProjectController < ApplicationController
 
     locals = common_locals(params[:project_id])
     locals[:iterations] = current_iterations(params)
+    locals[:backlog] = UserStory.where(iteration_id: nil)
 
     haml :'project/show', locals: locals
   end

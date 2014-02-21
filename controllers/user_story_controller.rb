@@ -20,12 +20,6 @@ class UserStoryController < ApplicationController
       title: params[:title],
       description: params[:description],
       status: params[:status].to_i,
-      ready: !!params[:ready],
-      blocked: !!params[:blocked],
-      blocked_reason: params[:blocked_reason],
-      task_estimate: params[:task_estimate].to_f,
-      actual: params[:actual].to_f,
-      to_do: params[:to_do].to_f
     )
 
     locals =
