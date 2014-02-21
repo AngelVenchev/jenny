@@ -15,7 +15,6 @@ class ProjectController < ApplicationController
     user = User.find_by id: current_user_id
     if user and project.save
       user.projects << project
-      session[:show_name_text_box] = false
       flash[:notice] = "Successfully created project #{params[:name]}"
       redirect '/projects'
     else
@@ -42,7 +41,7 @@ class ProjectController < ApplicationController
     session[:offset] += params[:step].to_i if session[:offset].abs < Iteration.count
 
     locals = common_locals(params[:project_id])
-    locals[:iterations] = current_iterations
+    locals[:iterations] = current_iterations(params)
 
     haml :'project/show', locals: locals
   end

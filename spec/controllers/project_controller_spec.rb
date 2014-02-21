@@ -99,8 +99,6 @@ describe ProjectController, :type => :controller do
       regular_project = Project.create(project_params1)
       common_project = Project.create(project_params2)
 
-      Iteration
-
       user.projects << regular_project
       user.projects << common_project
 

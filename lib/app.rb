@@ -8,7 +8,7 @@ class App < Sinatra::Base
 
   router = Router.instance
 
-  request_path = "/?:0?/?:1?/?:2?"
+  request_path = "/?:0?/?:1?/?:2?/?:3?/?:4?/?:5?"
 
   get request_path do
     transfer_request(router)

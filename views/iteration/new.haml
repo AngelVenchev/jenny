@@ -1,0 +1,24 @@
+%form{id: 'new_iteration_form', class: 'form', action: "/projects/#{project_id}/iterations", method: "post"}
+  %ul
+    %li
+      %span{class: 'labels'}
+        %label{for: "title"} Iteration title:
+      %span{class: 'values'}
+        %input{type: "text", name: "title", class: "text"}
+    %li
+      %span{class: 'labels'}
+        %label{for: "theme"} Iteration theme:
+      %span{class: 'values'}
+        %input{type: "text", name: "theme", class: "text"}
+    %li
+      %span{class: 'labels'}
+        %label{for: "start_date"} Start date:
+      %span{class: 'values'}
+        %input{type: "text", name: "start_date", class: "datepicker"}
+    %li
+      %span{class: 'labels'}
+        %label{for: "end_date"} End date:
+      %span{class: 'values'}
+        %input{type: "text", name: "end_date", class: "datepicker"}
+    %li
+      %input{type: "submit", value: "Create", class: "button"}

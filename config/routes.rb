@@ -33,12 +33,8 @@ Router.init do
   controller: 'ProjectController', action: 'show'
 
   match method: :get, path: 'projects/:project_id/iterations/new',
-  controller: 'ProjectController', action: 'new'
+  controller: 'IterationController', action: 'new'
 
-  # Router.instance.routes.each do |k,v|
-  #   puts k
-  #   v.each do |k2,v2|
-  #     puts "#{k2} => #{v2}"
-  #   end
-  # end
+  match method: :post, path: 'projects/:project_id/iterations',
+  controller: 'IterationController', action: 'create'
 end
