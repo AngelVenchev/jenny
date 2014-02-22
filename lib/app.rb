@@ -30,6 +30,7 @@ class App < Sinatra::Base
   end
 
   def transfer_request(router)
+    escape_params
     path = request.env['REQUEST_PATH']
     path = request.env['PATH_INFO'] unless path
     evaluate_query(path, router)

@@ -43,4 +43,10 @@ module RequestHelper
   def extract_params(path)
     path.gsub('/', ' ').split
   end
+
+  def escape_params
+    params.each do |key, value|
+      params[key] = escape_html value
+    end
+  end
 end
