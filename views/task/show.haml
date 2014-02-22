@@ -1,0 +1,11 @@
+%h1=task.title
+%p=task.description
+%a{href: "/projects/#{project.id}/user_stories/#{story.id}/tasks/#{task.id}/edit"}Edit
+%p="Executor: #{task.executor.username}"
+%p="Tester: #{task.tester.username}"
+%p="Status: #{statuses[task.status]}"
+%p="Blocked: #{task.blocked}"
+%p="Blocked reason: #{task.blocked_reason}"
+%p="Estimate hours: #{task.estimate}"
+%p="Actual hours: #{task.actual}"
+%p="Hours to do: #{task.to_do}"

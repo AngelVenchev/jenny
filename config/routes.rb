@@ -88,4 +88,19 @@ Router.init do
   path: '/projects/:project_id/user_stories/:user_story_id/tasks',
   controller: 'TaskController',
   action: 'create'
+
+  match method: :get,
+  path: '/projects/:project_id/user_stories/:user_story_id/tasks/:task_id',
+  controller: 'TaskController',
+  action: 'show'
+
+  match method: :get,
+  path: '/projects/:project_id/user_stories/:user_story_id/tasks/:task_id/edit',
+  controller: 'TaskController',
+  action: 'edit'
+
+  match method: :post,
+  path: '/projects/:project_id/user_stories/:user_story_id/tasks/:task_id',
+  controller: 'TaskController',
+  action: 'update'
 end

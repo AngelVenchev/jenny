@@ -1,0 +1,75 @@
+%form{id: 'new_task_form', class: 'form', action: "/projects/#{project.id}/user_stories/#{story.id}/tasks/#{task.id}", method: "post"}
+  %ul
+    %li
+      %put{class: 'labels'}
+        %label{for: "title"} Title:
+      %span{class: 'values'}
+        %input{type: "text", name: "title", class: "text", value: "#{task.title}"}
+    %li
+      %span{class: 'labels'}
+        %label{for: "description"} Description:
+      %span{class: 'values'}
+        %input{type: "text", name: "description", class: "text", value: "#{task.description}"}
+    %li
+      %span{class: 'labels'}
+        %label{for: "executor_id"} Executor:
+      %span{class: 'values'}
+        %select{name:"executor_id", form:"new_task_form"}
+          -project.users.each do |user|
+            -if user.id == task.executor_id
+              %option{value: "#{user.id}", selected: ""}
+                ="#{user.username}"
+            -else
+              %option{value: "#{user.id}"}
+                ="#{user.username}"
+    %li
+      %span{class: 'labels'}
+        %label{for: "tester_id"} Tester:
+      %span{class: 'values'}
+        %select{name:"tester_id", form:"new_task_form"}
+          -project.users.each do |user|
+            -if user.id == task.tester_id
+              %option{value: "#{user.id}", selected: "" }
+                ="#{user.username}"
+            -else
+              %option{value: "#{user.id}"}
+                ="#{user.username}"
+    %li
+      %span{class: 'labels'}
+        %label{for: "status"} Status:
+      %span{class: "values"}
+        %select{name:"status", form:"new_task_form"}
+          -statuses.each do |key, status|
+            -if key == task.status
+              %option{value: "#{key}", selected: ""}
+                =status
+            -else
+              %option{value: "#{key}"}
+                =status
+    %li
+      %span{class: 'labels'}
+        %label{for: "blocked"} Blocked:
+      %span{class: "values"}
+        %input{type: 'checkbox', name: 'blocked', checked: "#{task.blocked}"}
+    %li
+      %span{class: 'labels'}
+        %label{for: "blocked_reason"} Blocked reason:
+      %span{class: 'values'}
+        %input{type: "text", name: "blocked_reason", class: "text", value: "#{task.blocked_reason}"}
+    %li
+      %span{class: 'labels'}
+        %label{for: "estimate"} Estimate:
+      %span{class: 'values'}
+        %input{type: "number", name: "estimate", step: 'any', value: "#{task.estimate}"}
+    %li
+      %span{class: 'labels'}
+        %label{for: "actual"} Actual:
+      %span{class: 'values'}
+        %input{type: "number", name: "actual", step: 'any', value: "#{task.actual}"}
+    %li
+      %span{class: 'labels'}
+        %label{for: "to_do"} To-Do:
+      %span{class: 'values'}
+        %input{type: "number", name: "to_do", step: 'any', value: "#{task.to_do}"}
+    %li
+      %input{type: "submit", value: "Create", class: "button"}
