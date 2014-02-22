@@ -9,7 +9,7 @@ module TaskHelper
     4 => 'Rejected'
   }
 
-  def create_task(params)
+  def initialize_task(params)
     Task.new title: params[:title],
              description: params[:description],
              status: params[:status],

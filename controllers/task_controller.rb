@@ -11,7 +11,7 @@ class TaskController < ApplicationController
   def create(params)
     redirect_if_not_logged_in
 
-    task = create_task
+    task = initialize_task(params)
 
     story = UserStory.find(params[:story_id])
     project = Project.find(params[:project_id])

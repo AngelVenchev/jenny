@@ -34,7 +34,7 @@ module ProjectHelper
     Project.new(name: params[:name], description: params[:description])
   end
 
-  def successful_create(user, project, params)
+  def successful_create(project, params)
     current_user.projects << project
     flash[:notice] = "Successfully created project #{params[:name]}"
     redirect '/projects'
@@ -61,9 +61,11 @@ module ProjectHelper
     }
   end
 
-  def show_locals
+  def show_locals(params)
     locals = common_locals(params[:project_id])
     locals[:iterations] = current_iterations(params)
     locals[:backlog] = UserStory.where(iteration_id: nil)
+
+    locals
   end
 end

@@ -6,10 +6,12 @@ class IterationController < ApplicationController
 
   def new(params)
     redirect_if_not_logged_in
+    project = Project.find(params[:project_id])
+
     locals =
     {
       user: current_user,
-      project_id: params[:project_id],
+      project: project,
       home: "/projects/#{params[:project_id]}"
     }
     haml :"iteration/new", locals: locals
@@ -18,10 +20,10 @@ class IterationController < ApplicationController
   def create(params)
     redirect_if_not_logged_in
 
-    iteration = initialize_iteration
+    iteration = initialize_iteration(params)
+    unsuccessful_create(params) unless iteration
 
-    overlapping = valid_overlapping(iteration)
-    redirect_back if overlapping
+    redirect_back unless valid_overlapping(iteration, params)
 
     project = Project.find(params[:project_id])
     if project && iteration.save
