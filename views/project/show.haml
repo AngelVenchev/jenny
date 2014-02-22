@@ -1,42 +1,43 @@
-%h1=project.name
-
-%p=project.description
-%table{border: '1', cellspacing: '10px'}
-  %tr
-    %td
+%h1{class: "explorerTitle"}
+  =project.name
+  %div{class: "buttons"}
+    %div{class: "newIteration"}
       %a{href: "/projects/#{project.id}/iterations/new"}Create New Iteration
+    %div{class: "newUserStory"}
       %a{href: "/projects/#{project.id}/user_stories/new"}Create New User Story
-    %td
+  %div{class: "controls"}
+    %div{class: "previous"}
       %a{href: "/projects/#{project.id}?step=-1"} previous
-    %td
+    %div{class: "current"}
       %a{href: "/projects/#{project.id}?current=1"} current
-    %td
+    %div{class: "next"}
       %a{href: "/projects/#{project.id}?step=1"} next
-  %tr
-    %td Backlog
-    - 3.times do |i|
-      -if iterations[i]
-        %td=iterations[i].title
-      -else
-        %td add more iterations
-  %tr
-    %td
-      -backlog.each do |story|
-        %div
-          %div
-            %a{href: "/projects/#{project.id}/user_stories/#{story.id}"}=story.title
-          %div="#{story.description} това може да се съкрати"
-          %div="статус: трябва да е картинка #{story.status}"
-          %div="да има квадрат с цвят спрямо тези:"
-          %div="ready: #{story.ready}, blocked: #{story.blocked}"
-    -3.times do |i|
-      -if iterations[i]
+  %table{class: "stories", border: "1", cellspacing: "10px"}
+    %tbody
+      %tr
+        %th>Backlog
+        -3.times do |i|
+          -if iterations[i]
+            %th=iterations[i].title
+          -else
+            %th
+              %a{href: "/projects/#{project.id}/iterations/new"}add more iterations
+      %tr
         %td
-          -iterations[i].user_stories.each do |story|
-            %div
-              %div
+          -backlog.each do |story|
+            %div{class: "story status-#{story.status} #{story.ready ? 'ready' : ''}#{story.blocked ? 'blocked' : ''}"}
+              %div{class: "number"}
+                %span{class: "icon"}
                 %a{href: "/projects/#{project.id}/user_stories/#{story.id}"}=story.title
-              %div="#{story.description} това може да се съкрати"
-              %div="статус: трябва да е картинка #{story.status}"
-              %div="да има квадрат с цвят спрямо тези:"
-              %div="ready: #{story.ready}, blocked: #{story.blocked}"
+              %div{class: "description"}=story.description
+              %div{class: "status"}
+        -3.times do |i|
+          -if iterations[i]
+            %td
+              -iterations[i].user_stories.each do |story|
+                %div{class: "story status-#{story.status} #{story.ready ? 'ready' : ''}#{story.blocked ? 'blocked' : ''}"}
+                  %div{class: "number"}
+                    %span{class: "icon"}
+                    %a{href: "/projects/#{project.id}/user_stories/#{story.id}"}=story.title
+                  %div{class: "description"}=story.description
+                  %div{class: "status"}

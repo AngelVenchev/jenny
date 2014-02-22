@@ -100,7 +100,7 @@ module TaskHelper
     }
   end
 
-  def show_locals
+  def show_locals(params)
     project, story, task = fetch_project_story_task(params)
 
     {

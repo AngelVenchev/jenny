@@ -26,7 +26,7 @@ class TaskController < ApplicationController
   def show(params)
     redirect_if_not_logged_in
 
-    haml :'task/show', locals: show_locals
+    haml :'task/show', locals: show_locals(params)
   end
 
   def edit(params)

@@ -2,9 +2,9 @@
 module UserStoryHelper
   STATUS_VALUES =
   {
-    0 => 'Defined',
+    0 => 'Finished',
     1 => 'In Progress',
-    2 => 'Finished'
+    2 => 'Rejected'
   }
 
   def initialize_user_story(params)

@@ -1,11 +1,34 @@
-%h1=task.title
-%p=task.description
-%a{href: "/projects/#{project.id}/user_stories/#{story.id}/tasks/#{task.id}/edit"}Edit
-%p="Executor: #{task.executor.username}"
-%p="Tester: #{task.tester.username}"
-%p="Status: #{statuses[task.status]}"
-%p="Blocked: #{task.blocked}"
-%p="Blocked reason: #{task.blocked_reason}"
-%p="Estimate hours: #{task.estimate}"
-%p="Actual hours: #{task.actual}"
-%p="Hours to do: #{task.to_do}"
+%table{class: "subtaskDescription"}
+  %tr
+    %th
+      %span{class: "icon"}
+      %span{class: "text"}=task.title
+    %th
+      %div{class: "edit"}
+        %a{href: "/projects/#{project.id}/user_stories/#{story.id}/tasks/#{task.id}/edit"}Edit
+  %tr
+    %td Description
+    %td=task.description
+  %tr
+    %td Executor
+    %td=task.executor.username
+  %tr
+    %td Tester
+    %td=task.tester.username
+  %tr{class: "status status-#{task.status}"}
+    %td Status
+    %td
+      %div{class: "icon"}
+      %div{class: "text"}=statuses[task.status]
+  %tr
+    %td Blocked
+    %td=task.blocked_reason
+  %tr
+    %td Estimate
+    %td=task.estimate
+  %tr
+    %td Actual
+    %td=task.actual
+  %tr
+    %td To do
+    %td=task.to_do

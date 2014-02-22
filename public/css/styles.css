@@ -1,0 +1,358 @@
+body {
+  padding: 75px 25px 0;
+}
+.starter-template {
+  padding: 40px 15px;
+  text-align: center;
+}
+
+/*Story Explorer*/
+.explorerTitle {
+  margin: 0;
+  color: gray;
+  text-align: center;
+  line-height: 60px;
+  font-size: 45px;
+}
+.buttons {
+  width: 404px;
+  margin: 10px auto;
+  font-size:16px;
+}
+.newIteration ,
+.newUserStory {
+  width: 200px;
+  text-align: center;
+  display: inline-block;
+  height: 35px;
+  line-height: 33px;
+  color: #fff;
+  background-color: #428bca;
+  border: 1px solid #4684b9;
+  border-radius: 10px;
+  padding: 0 10px;
+}
+.newIteration  a,
+.newUserStory  a{
+  color: #fff;
+  text-decoration: none;
+}
+.newIteration:hover,
+.newUserStory:hover {
+  background-color: #4684b9;
+}
+.controls {
+  width: 358px;
+  margin: 10px auto;
+  font-size:16px;
+}
+.previous,
+.current,
+.next {
+  display:inline-block;
+  height: 30px;
+  line-height: 30px;
+  width: 100px;
+  text-align: center;
+  color: #fff;
+  background-color: darkgray;
+  border: 1px solid gray;
+  border-radius: 10px;
+  padding: 0 10px;
+}
+.current {
+  width: 150px;
+}
+.previous a,
+.current a,
+.next  a{
+  color: #fff;
+  text-decoration: none;
+}
+.stories {
+  width: 100%;
+}
+.stories th {
+  height: 35px;
+  border: 1px solid gray;
+  color: gray;
+  text-align: center;
+}
+.stories tr td {
+  width: 25%;
+  vertical-align: top;
+  border: 1px solid gray;
+}
+.story {
+  width: auto;
+  border: 2px solid gray;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 5px;
+}
+.story  .number {
+  border-bottom: 1px solid gray;
+}
+.story div  a {
+  text-transform: uppercase;
+  font-size: 15px;
+}
+.story .icon {
+  display: inline-block;
+  width: 12px;
+  height: 15px;
+  background-color: gray;
+  background: url(/public/images/storyIcon.png) 0 0 no-repeat;
+}
+.story .description {
+  font-size: 15px;
+  text-align: left;
+  line-height: 25px;
+}
+.story .status {
+  background-color: blue;
+  width: 16px;
+  height: 18px;
+}
+.story.status-0 .status {
+  background: url(/public/images/defined.png) 0 0 no-repeat;
+}
+.story.status-1 .status {
+  background: url(/public/images/progress.png) 0 0 no-repeat;
+}
+.story.status-2 .status {
+  background: url(/public/images/rejected.png) 0 0 no-repeat;
+}
+.story.ready {
+  background-color: #ccfade;
+}
+.story.blocked {
+  background-color: #ffd0d0;
+}
+/*Story Explorer END*/
+
+/*User Story*/
+.taskTitle {
+  margin: 20px;
+}
+.taskTitle  .text {
+  color: #5c5c5c;
+  font-size: 45px;
+  line-height: 45px;
+}
+.taskTitle  .icon {
+  display: inline-block;
+  width: 31px;
+  height: 40px;
+  background: url(/public/images/storyIconBig.png) 0 0 no-repeat;
+}
+.mainTaskDescription tr td {
+  vertical-align: top;
+  line-height: 30px;
+  padding: 0 10px;
+}
+.mainTaskDescription tr td:first-child {
+  border-right: 1px dashed gray;
+  text-align: right;
+  color: gray;
+  font-weight: 700;
+}
+.mainTaskDescription .status .icon,
+.mainTaskDescription .status .text {
+  display: inline-block;
+}
+.mainTaskDescription .status .icon {
+  background-color: blue;
+  width: 16px;
+  height: 18px;
+}
+.mainTaskDescription .status.status-0 .icon {
+  background: url(/public/images/defined.png) 0 0 no-repeat;
+}
+.mainTaskDescription .status.status-1 .icon {
+  background: url(/public/images/progress.png) 0 0 no-repeat;
+}
+.mainTaskDescription .status.status-2 .icon {
+  background: url(/public/images/rejected.png) 0 0 no-repeat;
+}
+.mainTaskDescription  .ready .icon {
+  width: 25px;
+  height: 20px;
+  background: url(/public/images/ready.png) 0 0 no-repeat;
+}
+.addTask {
+  text-align: center;
+  display: inline-block;
+  height: 35px;
+  line-height: 33px;
+  color: #fff;
+  background-color: #428bca;
+  border: 1px solid #4684b9;
+  border-radius: 10px;
+  padding: 0 20px;
+  margin: 15px 0;
+}
+.addTask  a {
+  color: #fff;
+  text-decoration: none;
+}
+.addTask:hover {
+  background-color: #4684b9;
+}
+.subtasks {
+  width: 100%;
+  max-width: 800px;
+}
+.subtasks tr th {
+  height: 35px;
+  color: gray;
+  text-align: left;
+  border: 1px solid gray;
+  padding: 10px;
+}
+.subtasks tr td {
+  border: 1px solid gray;
+  padding: 10px;
+}
+/*User Story END*/
+
+/*Subtask description*/
+.subtaskDescription {
+  width: 100%;
+  max-width: 600px;
+}
+.subtaskDescription th .text {
+  color: #5c5c5c;
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 45px;
+}
+.subtaskDescription .edit {
+  text-align: center;
+  display: inline-block;
+  height: 35px;
+  line-height: 33px;
+  color: #fff;
+  background-color: #428bca;
+  border: 1px solid #4684b9;
+  border-radius: 10px;
+  padding: 0 20px;
+  margin: 15px 0;
+}
+.subtaskDescription .edit  a {
+  color: #fff;
+  text-decoration: none;
+}
+.subtaskDescription .edit:hover {
+  background-color: #4684b9;
+}
+.subtaskDescription tr td {
+  vertical-align: top;
+  line-height: 30px;
+  padding: 0 10px;
+}
+.subtaskDescription tr th {
+  padding: 0 10px;
+}
+.subtaskDescription tr th:first-child {
+  text-align: right;
+}
+.subtaskDescription tr td:first-child {
+  border-right: 1px dashed gray;
+  text-align: right;
+  color: gray;
+  font-weight: 700;
+}
+.subtaskDescription .status .icon,
+.subtaskDescription .status .text {
+  display: inline-block;
+}
+.subtaskDescription .status .icon {
+  background-color: blue;
+  width: 16px;
+  height: 18px;
+}
+.subtaskDescription .status.status-0 .icon {
+  background: url(/public/images/defined.png) 0 0 no-repeat;
+}
+.subtaskDescription .status.status-1 .icon {
+  background: url(/public/images/progress.png) 0 0 no-repeat;
+}
+.subtaskDescription .status.status-2 .icon {
+  background: url(/public/images/rejected.png) 0 0 no-repeat;
+}
+/*Subtask description END*/
+
+/*Form description*/
+.labels {
+  text-align: right;
+  width: 30%;
+  display: inline-block;
+}
+
+.form {
+  border:1px solid silver;
+  border-radius: 10px;
+  width: 450px;
+  line-height: 30px;
+  margin:auto;
+  vertical-align: center;
+  margin-bottom: 100px;
+}
+
+.form fieldset {
+  margin: 0;
+  padding: 0;
+}
+
+.form ul {
+  list-style-type: none
+}
+
+.form li {
+  margin-top: 15px;
+}
+
+.form li input {
+  border: 1px solid silver;
+  border-radius: 10px;
+  height: 30px;
+  padding: 0 10px;
+}
+
+.form li input:focus {
+  box-shadow: 1px 1px 10px dark-gray;
+  outline: none;
+}
+
+.form .button {
+  height: 40px;
+  line-height: 34px;
+  width: 350px;
+  margin: 0 auto;
+  padding: 0;
+  color: white;
+  border: 2px solid gray;
+  border-radius: 10px;
+  background-color: silver;
+  font-size: 18px;
+  text-transform: uppercase;
+
+  background: -webkit-linear-gradient(to left, silver 50%, gray 50%);
+  background: -moz-linear-gradient(to left, silver 50%, gray 50%);
+  background: -o-linear-gradient(to left, silver 50%, gray 50%);
+  background: -ms-linear-gradient(to left, silver 50%, gray 50%);
+  background: linear-gradient(to left, silver 50%, gray 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  -webkit-transition: background-position 600ms, box-shadow 60ms linear;
+  -moz-transition: background-position 600ms, box-shadow 60ms linear;
+  -o-transition: background-position 600ms, box-shadow 60ms linear;
+  -ms-transition: background-position 600ms, box-shadow 60ms linear;
+  transition: background-position 600ms, box-shadow 60ms linear;
+}
+
+.form .button:hover {
+  background-position: left bottom;
+}
+/*Form description END*/

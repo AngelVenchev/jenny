@@ -1,29 +1,54 @@
-%h1=story.title
-%p="описание: #{story.description}"
-%p="статус #{statuses[story.status]}"
-%p="ready #{story.ready} картинки може би"
-%p="blocked #{story.blocked} пак картинка"
-%p="blocked reason #{story.blocked_reason}"
-%p="task estimate: #{story.estimate}"
-%p="actual #{story.actual}"
-%p="to do #{story.to_do}"
+%div{class: "taskTitle"}
+  %span{class: "icon"}
+  %span{class: "text"}=story.title
 
-%a{href:"/projects/#{project.id}/user_stories/#{story.id}/tasks/new"} Add new task
 
-%table
+%table{class: "mainTaskDescription"}
   %tr
-    %th Task name
-    %th Executor
-    %th Tester
-    %th Est.
-    %th Act.
-    %th To-Do
-  -story.tasks.each do |task|
+    %td Description
+    %td=story.description
+  %tr{class: "status status-#{story.status}"}
+    %td Status
+    %td>
+      %div{class: "icon"}
+      %div{class: "text"}=statuses[story.status]
+  %tr{class: "#{story.ready ? 'ready' : ''}"}
+    %td Ready
+    %td
+      %div{class: "icon"}
+  %tr{class: "blocked"}
+    %td Blocked
+    %td=story.blocked_reason
+  %tr
+    %td Estimate:
+    %td=story.estimate
+  %tr
+    %td Actual
+    %td=story.actual
+  %tr
+    %td To do
+    %td=story.to_do
+
+%div{class: "addTask"}
+  %a{href:"/projects/#{project.id}/user_stories/#{story.id}/tasks/new"} Add new task
+
+%table{class: "subtasks"}
+  %tbody
     %tr
-      %th
-        %a{href:"/projects/#{project.id}/user_stories/#{story.id}/tasks/#{task.id}"}=task.title
-      %th=task.executor ? task.executor.username : nil
-      %th=task.tester ? task.executor.username : nil
-      %th=task.estimate
-      %th=task.actual
-      %th=task.to_do
+      %th Task name
+      %th Status
+      %th Executor
+      %th Tester
+      %th Est.
+      %th Act.
+      %th To-Do
+    -story.tasks.each do |task|
+      %tr
+        %th
+          %a{href:"/projects/#{project.id}/user_stories/#{story.id}/tasks/#{task.id}"}=task.title
+        %th=statuses[task.status]
+        %th=task.executor ? task.executor.username : nil
+        %th=task.tester ? task.executor.username : nil
+        %th=task.estimate
+        %th=task.actual
+        %th=task.to_do
