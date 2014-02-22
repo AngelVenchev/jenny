@@ -41,3 +41,5 @@
                     %a{href: "/projects/#{project.id}/user_stories/#{story.id}"}=story.title
                   %div{class: "description"}=story.description
                   %div{class: "status"}
+          -else
+            %td

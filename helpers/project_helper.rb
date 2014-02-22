@@ -64,7 +64,9 @@ module ProjectHelper
   def show_locals(params)
     locals = common_locals(params[:project_id])
     locals[:iterations] = current_iterations(params)
-    locals[:backlog] = UserStory.where(iteration_id: nil)
+    backlog = UserStory.where iteration_id: nil,
+                              project_id: params[:project_id]
+    locals[:backlog] = backlog
 
     locals
   end
