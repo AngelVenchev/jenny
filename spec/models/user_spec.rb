@@ -9,31 +9,69 @@ describe User do
   end
 
   before do
-    ActiveRecord::Base.establish_connection adapter: 'sqlite3', database: './test.db'
+    ActiveRecord::Base.establish_connection(
+      adapter: 'sqlite3',
+      database: './test.db')
   end
 
   describe 'validation' do
-    let(:credentials1) { {username: 'test_user', email: 'test_email', password: 'test_password'} }
-    let(:credentials2) { {username: 'TEST_user', email: 'test_email', password: 'test_password'} }
-    let(:credentials3) { {username: 'test_user2', email: 'test_email', password: 'test_password'} }
-    let(:credentials4) { {username: 'test_user3', email: 'test_EMAIL', password: 'test_password'} }
+    let(:credentials1) do
+      {
+        username: 'test_user',
+        email: 'test_email',
+        password: 'test_password'
+      }
+    end
+    let(:credentials2) do
+      {
+        username: 'TEST_user',
+        email: 'test_email',
+        password: 'test_password'
+      }
+    end
+    let(:credentials3) do
+      {
+        username: 'test_user2',
+        email: 'test_email',
+        password: 'test_password'
+      }
+    end
+    let(:credentials4) do
+      {
+        username: 'test_user3',
+        email: 'test_EMAIL',
+        password: 'test_password'
+      }
+    end
     before do
       user = User.init(credentials1)
       user.save
     end
 
     it "doesn't allow users without a username" do
-      mail_password = {email: 'mail@mail.com', password: 'pass'}
+      mail_password =
+      {
+        email: 'mail@mail.com',
+        password: 'pass'
+      }
       User.create(mail_password).errors.size.should_not == 0
     end
 
     it "doesn't allow users without an email" do
-      username_password = {username: 'username', password: 'pass'}
+      username_password =
+      {
+        username: 'username',
+        password: 'pass'
+      }
       User.create(username_password).errors.size.should_not == 0
     end
 
     it "doesn't allow user without a password" do
-      username_mail = {username: 'username', email: 'mail@mail.com'}
+      username_mail =
+      {
+        username: 'username',
+        email: 'mail@mail.com'
+      }
       User.create(username_mail).errors.size.should_not == 0
     end
 
@@ -63,8 +101,20 @@ describe User do
   end
 
   describe 'password digest' do
-    let(:credentials1) { {username: 'test1',email: 'test1', password: 'test'} }
-    let(:credentials2) { {username: 'test2',email: 'test2', password: 'test'} }
+    let(:credentials1) do
+      {
+        username: 'test1',
+        email: 'test1',
+        password: 'test'
+      }
+    end
+    let(:credentials2) do
+      {
+        username: 'test2',
+        email: 'test2',
+        password: 'test'
+      }
+    end
 
     it 'is 128bit' do
       user = User.init(credentials1)
@@ -89,8 +139,14 @@ describe User do
   end
 
   describe 'authentication' do
-    let(:register_credentials) { {username: 'user', email: 'mail', password: 'pass'} }
-    let(:login_credentials) { ['user', 'pass'] }
+    let(:register_credentials) do
+      {
+        username: 'user',
+        email: 'mail',
+        password: 'pass'
+      }
+    end
+    let(:login_credentials) { %w(user pass) }
 
     context 'non-existing user' do
       it 'can create user' do
@@ -111,7 +167,7 @@ describe User do
 
       it 'can authenticate user' do
         user = User.authenticate(*login_credentials)
-        user.should_not == nil
+        user.should_not.nil?
       end
 
       after do

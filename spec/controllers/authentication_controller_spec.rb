@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe AuthenticationController, :type => :controller do
+describe AuthenticationController do
   include Rack::Test::Methods
 
   def app
@@ -8,13 +8,18 @@ describe AuthenticationController, :type => :controller do
   end
 
   before do
-    ActiveRecord::Base.establish_connection adapter: 'sqlite3', database: './test.db'
+    ActiveRecord::Base.establish_connection(
+      adapter: 'sqlite3',
+      database: './test.db')
   end
 
-  describe 'the signin process', :type => :feature do
+  describe 'the signin process', type: :feature do
 
     before do
-      user = User.init(username: 'user', email: 'user@example.com', password: 'password')
+      user = User.init(
+        username: 'user',
+        email: 'user@example.com',
+        password: 'password')
       user.save
     end
 
@@ -25,14 +30,24 @@ describe AuthenticationController, :type => :controller do
     end
 
     it 'signs me in' do
-      post '/auth/login', {username: 'user', password: 'password'}
+      params =
+      {
+        username: 'user',
+        password: 'password'
+      }
+      post '/auth/login', params
       last_response.should be_redirect
       follow_redirect!
       last_request.url.should == 'http://example.org/projects'
     end
 
     it "doesn't sign me in with invalid credentials" do
-      post '/auth/login', {username: 'invalid_user', password: 'password'}
+      params =
+      {
+        username: 'invalid_user',
+        password: 'password'
+      }
+      post '/auth/login', params
       last_response.should be_redirect
 
       follow_redirect!
@@ -45,10 +60,15 @@ describe AuthenticationController, :type => :controller do
     end
   end
 
-  describe 'the signout process', :type => :feature do
+  describe 'the signout process', type: :feature do
 
     before do
-      post '/auth/login', {username: 'user', password: 'password'}
+      params =
+      {
+        username: 'user',
+        password: 'password'
+      }
+      post '/auth/login', params
     end
 
     it 'signs me out' do
@@ -60,10 +80,14 @@ describe AuthenticationController, :type => :controller do
     end
   end
 
-  describe 'the register process', :type => :feature do
+  describe 'the register process', type: :feature do
 
     let(:params) do
-      params =  {username: 'new_user', email: 'test@gmail.com', password: 'test'}
+      {
+        username: 'new_user',
+        email: 'test@gmail.com',
+        password: 'test'
+      }
     end
 
     it 'shows register page' do
@@ -77,10 +101,9 @@ describe AuthenticationController, :type => :controller do
       last_response.should be_redirect
 
       follow_redirect!
-      last_request.url.should == 'http://example.org/projects'
 
       user = User.find_by username: 'new_user'
-      user.should_not == nil
+      user.should_not.nil?
     end
 
     it "doesn't create the same user twice" do

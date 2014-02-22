@@ -1,5 +1,6 @@
 require 'date'
 
+# Iteration model
 class Iteration < ActiveRecord::Base
   belongs_to :project
   has_many :user_stories
@@ -8,7 +9,7 @@ class Iteration < ActiveRecord::Base
   validates :start_date, presence: true
   validates :end_date, presence: true
 
-  def is_current?
-    start_date < DateTime.now and end_date > DateTime.now
+  def current?
+    start_date < DateTime.now && end_date > DateTime.now
   end
 end

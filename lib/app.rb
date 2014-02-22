@@ -1,3 +1,4 @@
+# Main instance of the sinatra process
 class App < Sinatra::Base
   register Sinatra::Helpers
   register Sinatra::Flash
@@ -8,7 +9,7 @@ class App < Sinatra::Base
 
   router = Router.instance
 
-  request_path = "/?:0?/?:1?/?:2?/?:3?/?:4?/?:5?/?:6?/?:7?"
+  request_path = '/?:0?/?:1?/?:2?/?:3?/?:4?/?:5?/?:6?/?:7?'
 
   get request_path do
     transfer_request(router)
@@ -29,8 +30,8 @@ class App < Sinatra::Base
   end
 
   def transfer_request(router)
-    path = request.env["REQUEST_PATH"]
-    path = request.env["PATH_INFO"] unless path
+    path = request.env['REQUEST_PATH']
+    path = request.env['PATH_INFO'] unless path
     evaluate_query(path, router)
   end
 end

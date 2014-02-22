@@ -1,11 +1,12 @@
+# Helper module for the router class
 module RequestHelper
   private
 
   def evaluate_query(path, router)
     paths = router.routes[normalized_request_method].keys
-    real_path = paths.select { |p| match?(path,p) }.first
+    real_path = paths.select { |p| match?(path, p) }.first
 
-    raise ArgumentError, "No such route #{path}" unless real_path
+    fail ArgumentError, "No such route #{path}" unless real_path
 
     prepare_params(real_path, params)
     router.routes[normalized_request_method][real_path].call(params, self)
@@ -21,7 +22,7 @@ module RequestHelper
     true
   end
 
-  def check_parameter(to_match,to_be_matched)
+  def check_parameter(to_match, to_be_matched)
     return true if to_be_matched[0].include? ':'
     to_be_matched == to_match
   end
@@ -42,6 +43,4 @@ module RequestHelper
   def extract_params(path)
     path.gsub('/', ' ').split
   end
-
-
 end

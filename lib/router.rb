@@ -1,19 +1,22 @@
 require 'singleton'
 
+# Router class to match all routes to controllers and actions
+# according to the MVC architecture
 class Router
   include Singleton
 
   attr_accessor :routes
 
   def self.init(&block)
-    Router.instance.instance_eval &block
+    Router.instance.instance_eval(&block)
   end
 
   def initialize
     @routes = {}
   end
 
-  def match(path: required, controller: required, action: required, method: :get)
+  def match(path: required, controller: required,
+    action: required, method: :get)
     @routes[method] ||= {}
     @routes[method][path] = lambda do |params, context|
       Kernel.const_get(controller).new(context).send(action, params)

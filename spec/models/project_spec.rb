@@ -8,13 +8,17 @@ describe Project do
   end
 
   before do
-    ActiveRecord::Base.establish_connection adapter: 'sqlite3', database: './test.db'
+    ActiveRecord::Base.establish_connection(
+      adapter: 'sqlite3',
+      database: './test.db')
   end
 
-  describe "validation" do
+  describe 'validation' do
 
     before do
-      Project.create(name: "test_project", description: 'test_desctiprion')
+      Project.create(
+        name: 'test_project',
+        description: 'test_desctiprion')
     end
 
     it "doesn't allow nameless projects" do
@@ -22,11 +26,19 @@ describe Project do
     end
 
     it "doesn't allow name duplication" do
-      Project.create(name: "test_project", description:'description').errors.any?.should == true
+      project = Project.create(
+        name: 'test_project',
+        description: 'description')
+
+      project.errors.any?.should == true
     end
 
     it "doesn't allow diffrent case name duplication" do
-      Project.create(name: "test_PROJECT", description:'description').errors.any?.should == true
+      project = Project.create(
+        name: 'test_PROJECT',
+        description: 'description')
+
+      project.errors.any?.should == true
     end
 
     it 'allows records with no description' do
@@ -38,12 +50,12 @@ describe Project do
     end
   end
 
-  describe "association" do
+  describe 'association' do
     before do
       Project.create(name: 'project1', description: 'description1')
       Project.create(name: 'project2', description: 'description2')
-      User.create(username: 'user1',email: 'mail1', password: 'pass')
-      User.create(username: 'user2',email: 'mail2', password: 'pass')
+      User.create(username: 'user1', email: 'mail1', password: 'pass')
+      User.create(username: 'user2', email: 'mail2', password: 'pass')
     end
 
     let(:test_project) { Project.find_by name: 'project1' }

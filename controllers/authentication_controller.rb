@@ -1,6 +1,7 @@
+# Authentication controller connected with the user model
 class AuthenticationController < ApplicationController
   def new(params)
-    haml :"auth/register", :layout => :'home_layout'
+    haml :"auth/register", layout: :'home_layout'
   end
 
   def register(params)
@@ -16,24 +17,24 @@ class AuthenticationController < ApplicationController
   end
 
   def show(params)
-    haml :"auth/login", :layout => :'home_layout'
+    haml :"auth/login", layout: :'home_layout'
   end
 
   def login(params)
-    user = User.authenticate(params[:username],params[:password])
+    user = User.authenticate(params[:username], params[:password])
     if user
-      flash[:notice] = "Successfully logged in to Jenny!"
+      flash[:notice] = 'Successfully logged in to Jenny!'
       session[:user_id] = user.id
       redirect '/projects'
     else
-      flash[:error] = "Wrong username and/or password!"
+      flash[:error] = 'Wrong username and/or password!'
       redirect '/auth/login'
     end
   end
 
   def logout(params)
     session[:user_id] = nil
-    flash[:notice] = "Successfully logged out of Jenny"
+    flash[:notice] = 'Successfully logged out of Jenny'
     redirect '/'
   end
 end

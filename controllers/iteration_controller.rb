@@ -1,6 +1,9 @@
 require 'date'
 
+# Iteration Controller
 class IterationController < ApplicationController
+  include IterationHelper
+
   def new(params)
     redirect_if_not_logged_in
     locals =
@@ -14,35 +17,17 @@ class IterationController < ApplicationController
 
   def create(params)
     redirect_if_not_logged_in
-    iteration = Iteration.new(
-      title: params[:title],
-      theme: params[:theme],
-      start_date: Date.parse(params[:start_date]),
-      end_date: Date.parse(params[:end_date]))
 
+    iteration = initialize_iteration
 
-    Iteration.all.each do |i|
-      overlap =
-        iteration.start_date <= i.end_date &&
-        i.start_date <= iteration.end_date
-      if overlap
-        flash[:notice] = <<END
-Unable to create iteration #{params[:title]}.
-It overlaps with iteraiton #{i.title}
-END
-        redirect back
-      end
-    end
+    overlapping = valid_overlapping(iteration)
+    redirect_back if overlapping
 
     project = Project.find(params[:project_id])
-    user = current_user
-    if project and iteration.save
-      project.iterations << iteration
-      flash[:notice] = "Successfully created iteration #{params[:title]}"
-      redirect "/projects/#{project.id}"
+    if project && iteration.save
+      successful_create(project, iteration, params)
     else
-      flash[:error] = "Unable to create iteration #{params[:title]}"
-      redirect "/projects/#{params[:project_id]}/iterations/new"
+      unsuccessful_create(params)
     end
   end
 end

@@ -1,0 +1,7 @@
+LineLength:
+  Max: 99
+
+AllCops:
+  Excludes:
+    - db/**
+    - controllers/application_controller.rb

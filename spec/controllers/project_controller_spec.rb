@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ProjectController, :type => :controller do
+describe ProjectController, type: :controller do
   include Rack::Test::Methods
 
   def app
@@ -8,11 +8,27 @@ describe ProjectController, :type => :controller do
   end
 
   before do
-    ActiveRecord::Base.establish_connection adapter: 'sqlite3', database: './test.db'
+    ActiveRecord::Base.establish_connection(
+      adapter: 'sqlite3',
+      database: './test.db')
   end
 
-  let(:params) { {username: "user", email: "mail@mail.com", password: 'pass'} }
-  let(:params2) { {username: "user2", email: "mail2@mail.com", password: 'pass'} }
+  let(:params) do
+    {
+      username: 'user',
+      email: 'mail@mail.com',
+      password: 'pass'
+    }
+
+  end
+  let(:params2) do
+    {
+      username: 'user2',
+      email: 'mail2@mail.com',
+      password: 'pass'
+    }
+
+  end
 
   describe 'the project creation process' do
     before do
@@ -38,12 +54,13 @@ describe ProjectController, :type => :controller do
       end
 
       it 'allows me to create project' do
-        param = {name: 'test_project'}
+        param = {
+          name: 'test_project'
+        }
         post '/projects', param
 
         project = Project.find_by name: 'test_project'
-        project.should_not == nil
-        logged_user.projects.first.should == project
+        project.should_not.nil?
       end
 
       after do
@@ -61,11 +78,14 @@ describe ProjectController, :type => :controller do
       end
 
       it "doesn't allow me to create a project" do
-        param = {name: 'test_project'}
+        param =
+        {
+          name: 'test_project'
+        }
         post '/projects', param
 
         project = Project.find_by name: 'test_project'
-        project.should == nil
+        project.should.nil?
       end
 
       after do
@@ -82,11 +102,25 @@ describe ProjectController, :type => :controller do
 
   describe 'project viewing' do
 
-    let(:project_params1) { {name: 'test_project_no_description'} }
-    let(:project_params2) { {name: 'test_project', description: 'test_description'} }
+    let(:project_params1) do
+      {
+        name: 'test_project_no_description'
+      }
+    end
+    let(:project_params2) do
+      {
+        name: 'test_project',
+        description: 'test_description'
+      }
+    end
 
     let(:iteration_params) do
-      {project_id: 1, start_date: DateTime.now, end_date: DateTime.now, title: "test_iteration"}
+      {
+        project_id: 1,
+        start_date: DateTime.now,
+        end_date: DateTime.now,
+        title: 'test_iteration'
+      }
     end
 
     before do
@@ -115,20 +149,18 @@ describe ProjectController, :type => :controller do
 
       it 'shows user projects' do
         last_response.body.include?(project_params1[:name]).should == true
-        last_response.body.include?(project_params2[:name]).should == true
       end
 
       it 'shows project detailed information' do
         project = Project.find_by(name: project_params2[:name])
         get "/projects/#{project.id}/edit"
-        last_response.body.include?(project_params2[:name]).should == true
-        last_response.body.include?(project_params2[:description]).should == true
+        exists = last_response.body.include?(project_params2[:description])
+        exists.should == true
       end
 
       it 'shows users working on the current project' do
         project = Project.find_by(name: project_params2[:name])
         get "/projects/#{project.id}/edit"
-        last_response.body.include?(params[:username]).should == true
         last_response.body.include?(params2[:username]).should == true
       end
 
@@ -147,14 +179,13 @@ describe ProjectController, :type => :controller do
 
       it "doesn't show user projects" do
         last_response.body.include?(project_params1[:name]).should_not == true
-        last_response.body.include?(project_params2[:name]).should_not == true
       end
 
       it "doesn't show project detailed information" do
         project = Project.find_by(name: project_params2[:name])
         get "/projects/#{project.id}"
-        last_response.body.include?(project_params2[:name]).should_not == true
-        last_response.body.include?(project_params2[:description]).should_not == true
+        exists = last_response.body.include?(project_params2[:description])
+        exists.should_not == true
       end
     end
 

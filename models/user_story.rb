@@ -1,3 +1,4 @@
+# UserStory model
 class UserStory < ActiveRecord::Base
   belongs_to :project
   belongs_to :iteration

@@ -9,12 +9,16 @@ describe Project do
   end
 
   before do
-    ActiveRecord::Base.establish_connection adapter: 'sqlite3', database: './test.db'
+    ActiveRecord::Base.establish_connection(
+      adapter: 'sqlite3',
+      database: './test.db')
   end
 
   describe 'validation' do
 
-    let(:project) { Project.create(name: 'name', description: 'description') }
+    let(:project) do
+      Project.create(name: 'name', description: 'description')
+    end
 
     it "doesn't allow records with no title" do
       params =
@@ -26,14 +30,27 @@ describe Project do
       Iteration.create(params).errors.size.should_not == 0
     end
 
-    it "doesn't allow records with no end or start dates" do
-      params1 = {project_id: project.id, title: 'test', start_date: DateTime.now}
-      params2 = {project_id: project.id, title: 'test', end_date: DateTime.now}
+    it "doesn't allow records with no start date" do
+      params2 =
+      {
+        project_id: project.id,
+        title: 'test',
+        end_date: DateTime.now
+      }
 
-      Iteration.create(params1).errors.size.should_not == 0
       Iteration.create(params2).errors.size.should_not == 0
     end
 
+    it "doesn't allow record with no end date" do
+      params1 =
+      {
+        project_id: project.id,
+        title: 'test',
+        start_date: DateTime.now
+      }
+
+      Iteration.create(params1).errors.size.should_not == 0
+    end
     after do
       Iteration.delete_all
       Project.delete_all
@@ -41,7 +58,7 @@ describe Project do
   end
 
   describe 'association' do
-    let(:project) { Project.create(name:'name', description: 'description') }
+    let(:project) { Project.create(name: 'name', description: 'description') }
 
     it 'belongs to project' do
       params =
