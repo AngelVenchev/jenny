@@ -175,4 +175,30 @@ describe User do
       end
     end
   end
+
+  describe 'password reset' do
+
+    let(:user) do
+      user = User.init username: 'Angel',
+                       email: 'mail',
+                       password: 'easy_to_remember'
+      user.save
+      user
+    end
+
+    before :each do
+      new_password = '123'
+      user.reset_password(new_password)
+    end
+
+    it "can't login with old password" do
+      logged_user = User.authenticate(user.username, 'easy_to_remember')
+      logged_user.should.nil?
+    end
+
+    it 'can login with new password' do
+      logged_user = User.authenticate(user.username, '123')
+      logged_user.should_not.nil?
+    end
+  end
 end

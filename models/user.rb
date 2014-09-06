@@ -21,4 +21,9 @@ class User < ActiveRecord::Base
     pass = Digest::SHA3.hexdigest(password)
     User.find_by password: pass, username: username
   end
+
+  def reset_password(new_password)
+    self.password = Digest::SHA3.hexdigest(new_password)
+    save
+  end
 end
