@@ -119,4 +119,8 @@ module TaskHelper
     task = Task.find(params[:task_id])
     [project, story, task]
   end
+
+  def TaskHelper.statuses
+    STATUS_VALUES
+  end
 end

@@ -49,6 +49,7 @@ module UserStoryHelper
       project: project,
       story: story,
       statuses: STATUS_VALUES,
+      task_statuses: TaskHelper.statuses,
       home: "/projects/#{params[:project_id]}"
     }
   end

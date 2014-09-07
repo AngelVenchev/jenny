@@ -46,7 +46,7 @@
       %tr
         %th
           %a{href:"/projects/#{project.id}/user_stories/#{story.id}/tasks/#{task.id}"}=task.title
-        %th=statuses[task.status]
+        %th=task_statuses[task.status]
         %th=task.executor ? task.executor.username : nil
         %th=task.tester ? task.executor.username : nil
         %th=task.estimate
