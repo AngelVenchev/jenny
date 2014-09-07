@@ -120,7 +120,7 @@ module TaskHelper
     [project, story, task]
   end
 
-  def TaskHelper.statuses
+  def self.statuses
     STATUS_VALUES
   end
 end

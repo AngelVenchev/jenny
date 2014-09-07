@@ -2,15 +2,17 @@
   %div{class: "createProjectBtn"}
     %a{href: '/projects/new'}
       Create a new project
-  %ul{class: "list"}
-    -user.projects.each do |project|
-      %div
-        %a{href:"/projects/#{project.id}", class: "projectBtn"}
+  -unless user.projects.size.zero?
+    %ul{class: "list"}
+      -user.projects.each do |project|
+        %div
+          %a{href:"/projects/#{project.id}", class: "projectBtn"}
+            =project.name
+-unless (Project.all - user.projects).size.zero?
+  %div{class: "form projetEnrollment"}
+    %ul
+      -(Project.all - user.projects).each do |project|
+        %li
           =project.name
-%div{class: "form"}
-  %ul
-    -(Project.all - user.projects).each do |project|
-      %li
-        =project.name
-        %a{href:"/projects/#{project.id}/enroll", class: "enrollBtn"}
-          enroll
+          %a{href:"/projects/#{project.id}/enroll", class: "enrollBtn"}
+            enroll
