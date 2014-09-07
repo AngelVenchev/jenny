@@ -37,4 +37,13 @@ class ProjectController < ApplicationController
 
     haml :'project/show', locals: show_locals(params)
   end
+
+  def enroll(params)
+    redirect_if_not_logged_in
+
+    project = Project.find(params[:project_id])
+    index_locals[:user].projects << project
+
+    index(params)
+  end
 end

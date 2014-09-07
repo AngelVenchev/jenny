@@ -1,7 +1,16 @@
-%ul
-  %li
-    %a{href: '/projects/new'}Create a new project
-  -user.projects.each do |project|
+%div
+  %ul
     %li
-      %a{href:"/projects/#{project.id}"}
+      %a{href: '/projects/new'}Create a new project
+    -user.projects.each do |project|
+      %li
+        %a{href:"/projects/#{project.id}"}
+          =project.name
+%div{class: "form"}
+  %ul
+    -(Project.all - user.projects).each do |project|
+      %li
         =project.name
+        |
+        %a{href:"/projects/#{project.id}/enroll"}
+          enroll

@@ -50,6 +50,11 @@ Router.init do
         action: 'edit'
 
   match method: :get,
+        path: '/projects/:project_id/enroll',
+        controller: 'ProjectController',
+        action: 'enroll'
+
+  match method: :get,
         path: '/projects/:project_id',
         controller: 'ProjectController',
         action: 'show'
