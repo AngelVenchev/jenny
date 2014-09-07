@@ -19,6 +19,26 @@ class UserStoryController < ApplicationController
     end
   end
 
+  def edit(params)
+    redirect_if_not_logged_in
+
+    haml :"user_story/edit", locals: show_locals(params)
+  end
+
+  def update(params)
+    redirect_if_not_logged_in
+
+    project = Project.find(params[:project_id])
+
+    story = updated_story(params)
+
+    if story.save
+      successful_edit(project, story, params)
+    else
+      unsuccessful_edit(project, story)
+    end
+  end
+
   def show(params)
     redirect_if_not_logged_in
 

@@ -19,18 +19,20 @@
   %tr{class: "blocked"}
     %td Blocked
     %td=story.blocked_reason
-  %tr
-    %td Estimate:
-    %td=story.estimate
-  %tr
-    %td Actual
-    %td=story.actual
-  %tr
-    %td To do
-    %td=story.to_do
+  / %tr
+  /   %td Estimate:
+  /   %td=story.estimate
+  / %tr
+  /   %td Actual
+  /   %td=story.actual
+  / %tr
+  /   %td To do
+  /   %td=story.to_do
 
 %div{class: "addTask"}
   %a{href:"/projects/#{project.id}/user_stories/#{story.id}/tasks/new"} Add new task
+%div{class: "addTask"}
+  %a{href:"/projects/#{project.id}/user_stories/#{story.id}/edit"} Edit user story
 
 %table{class: "subtasks"}
   %tbody

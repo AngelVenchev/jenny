@@ -53,4 +53,25 @@ module UserStoryHelper
       home: "/projects/#{params[:project_id]}"
     }
   end
+
+  def updated_story(params)
+    story = UserStory.find(params[:story_id])
+
+    story.title = params[:title]
+    story.description = params[:description]
+    story.status = params[:status].to_i
+    story.iteration_id = params[:iteration_id].to_i
+
+    story
+  end
+
+  def successful_edit(project, story, params)
+    flash[:notice] = "Succesfully updated user story #{story.title}"
+    redirect "projects/#{project.id}/user_stories/#{story.id}"
+  end
+
+  def unsuccessful_edit(project, story)
+    flash[:error] = "Unable to update user story #{story.title}"
+    redirect "projects/#{project.id}/user_stories/#{story.id}/edit"
+  end
 end
