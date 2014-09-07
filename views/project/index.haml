@@ -1,16 +1,16 @@
-%div
-  %ul
-    %li
-      %a{href: '/projects/new'}Create a new project
+%div{class: "projectsList"}
+  %div{class: "createProjectBtn"}
+    %a{href: '/projects/new'}
+      Create a new project
+  %ul{class: "list"}
     -user.projects.each do |project|
-      %li
-        %a{href:"/projects/#{project.id}"}
+      %div
+        %a{href:"/projects/#{project.id}", class: "projectBtn"}
           =project.name
 %div{class: "form"}
   %ul
     -(Project.all - user.projects).each do |project|
       %li
         =project.name
-        |
-        %a{href:"/projects/#{project.id}/enroll"}
+        %a{href:"/projects/#{project.id}/enroll", class: "enrollBtn"}
           enroll

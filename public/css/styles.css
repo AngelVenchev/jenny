@@ -121,6 +121,9 @@ body {
   background: url(/public/images/progress.png) 0 0 no-repeat;
 }
 .story.status-2 .status {
+  background: url(/public/images/ready.png) 0 0 no-repeat;
+}
+.story.status-4 .status {
   background: url(/public/images/rejected.png) 0 0 no-repeat;
 }
 .story.ready {
@@ -173,6 +176,9 @@ body {
   background: url(/public/images/progress.png) 0 0 no-repeat;
 }
 .mainTaskDescription .status.status-2 .icon {
+  background: url(/public/images/ready.png) 0 0 no-repeat;
+}
+.mainTaskDescription .status.status-4 .icon {
   background: url(/public/images/rejected.png) 0 0 no-repeat;
 }
 .mainTaskDescription  .ready .icon {
@@ -279,6 +285,9 @@ body {
   background: url(/public/images/progress.png) 0 0 no-repeat;
 }
 .subtaskDescription .status.status-2 .icon {
+  background: url(/public/images/ready.png) 0 0 no-repeat;
+}
+.subtaskDescription .status.status-4 .icon {
   background: url(/public/images/rejected.png) 0 0 no-repeat;
 }
 /*Subtask description END*/
@@ -315,7 +324,7 @@ body {
 
 .form li input {
   border: 1px solid silver;
-  border-radius: 10px;
+  border-radius: 5px;
   height: 30px;
   padding: 0 10px;
 }
@@ -356,3 +365,55 @@ body {
   background-position: left bottom;
 }
 /*Form description END*/
+
+/*Projects List Start*/
+.projectsList,
+.form {
+  display: block;
+}
+
+.projectsList {
+  float: left;
+}
+
+.form {
+  float:right;
+}
+
+.createProjectBtn {
+  margin: 0 20px 20px;
+  font-size:16px;
+  border: 1px solid grey;
+  border-radius: 5px;
+  padding: 5px;
+  text-decoration: none;
+}
+
+.createProjectBtn:hover {
+  text-decoration: none;
+}
+
+.list {
+  border: 1px solid grey;
+  border-radius: 5px;
+  padding: 10px;
+  width: auto;
+}
+
+.projectBtn {
+  margin: 20px;
+  line-height: 40px;
+  font-size: 18px;
+
+}
+
+.enrollBtn {
+  float: right;
+  text-transform: uppercase;
+  padding-right: 10px;
+}
+/*Projects List End*/
+
+.new-project-form .values textarea {
+  border-radius: 5px;
+}
